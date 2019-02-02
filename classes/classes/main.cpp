@@ -1,13 +1,4 @@
 #include <iostream>
 #include <string>
+#include "BMI.h"
 using namespace std;
-
-class Practice2
-{
-
-};
-
-int main ()
-{
-  return 0;
-}
