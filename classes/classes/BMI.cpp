@@ -4,9 +4,19 @@
  */
 
 
+#include <iostream>
 #include "BMI.h"
 
-/* Scope resolution
+using namespace std;
+
+/* Scope resolution Operator
  * - double colon (first part is the name of the class; second is the name of the function
+ * - it tells the compiler that the function is a member of a particular class
  */
+
+BMI::BMI()  //constructor
+{
+ cout << "Kevin" << endl;
+}
+
 

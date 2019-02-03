@@ -1,7 +1,17 @@
 /* Header file
- * - function declarations and prototypes
+ * - function prototypes and variable declarations
  */
 
-#include <iostream>
-#include <string>
-using namespace std;
+
+#ifndef BMI_h
+#define BMI_h
+
+class BMI
+{
+ public:
+  BMI();
+
+};
+
+
+#endif //BMI_h
