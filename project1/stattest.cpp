@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main ()
+int main()
 {
   statistician s;
   s.next(1.1);

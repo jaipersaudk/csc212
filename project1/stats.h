@@ -1,6 +1,6 @@
 #ifndef stats_h
 #define stats_h
-#include <iostream> //is this necessary?
+#include <iostream>
 
 namespace main_savitch_2C
 {
@@ -35,14 +35,10 @@ namespace main_savitch_2C
 
 /*   CONSTANT member functions  */
 
-  int length() const {
-    return count;
-  }
+  int length() const;
 /*   Postcondition: Returns the length of the sequence (# of times next(r) has been activated)  */
 
-  double sum() const {
-    return total;
-  }
+  double sum() const;
 /*   Postcondition: returns the sum of all numbers in the sequence  */
 
 

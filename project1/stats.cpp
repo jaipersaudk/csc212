@@ -19,20 +19,21 @@ void statistician::next(double r) {
   {
     count = 1;
     total = r;
-    minimum() = r;
-    maximum() = r;
+    smallest = r;
+    largest = r;
     return;
 
     count = count +1;
     total += r;
-/*     keep track of max and min  */
-    if (r < minimum())
+
+/*     keeping track of max and min  */
+    if (r < smallest)
     {
-      minimum() = r;
+      smallest = r;
     }
-    if (r > maximum())
+    if (r > largest)
     {
-      maximum() = r;
+      largest = r;
     }
   }
 }
