@@ -90,10 +90,27 @@ double statistician::minimum() const
   return smallest;
 }
 
-double statistician:: maximum() const
+double statistician::maximum() const
 {
   return largest;
 }
 
+bool operator ==(const statistician& s1, const statistician& s2)
+{
+  return (s1.length() == s2.length() && s1.mean() == s2.mean() && s1.minimum() == s2.minimum() && s1.maximum() == s2.maximum() && s1.sum() == s2.sum());
+}
+
+statistician operator +(const statistician& s1, const statistician& s2)
+{
+  statistician summation;
+  summation.next(s1.length() + s2.length());
+  return summation;
+}
 
 
+statistician operator *(double scale, const statistician& s)
+{
+  statistician product;
+  product.next(s.length() * scale);
+  return product;
+}
