@@ -3,7 +3,6 @@
 #include <iostream> //is this necessary?
 
 namespace main_savitch_2C
-using namespace std;
 {
   class statistician
   {
@@ -83,5 +82,6 @@ using namespace std;
 /* NON-MEMBER functions  */
 bool operator ==(const statistician& s1, const statistician& s2);
 /*   Postcondition: The return value is true if s1 and s2 have the zero length. Also, if the length is greater than zero, then s1 and s2 must have the same length, mean, minimum, maximum, and sum  */
+}
 
 #endif

@@ -1,8 +1,9 @@
-#include <iostream>
-#include <cassert>
 #include "stats.h"
-using namespace std;
+#include <cassert>
 
+
+namespace main_savitch_2C
+{
 
 /* constructor - setting initial values for private variables  */
 statistician::statistician()
@@ -18,20 +19,20 @@ void statistician::next(double r) {
   {
     count = 1;
     total = r;
-    minimum = r;
-    maximum = r;
+    minimum() = r;
+    maximum() = r;
     return;
 
     count = count +1;
     total += r;
 /*     keep track of max and min  */
-    if (r < minimum)
+    if (r < minimum())
     {
-      minimum = r;
+      minimum() = r;
     }
-    if (r > maximum)
+    if (r > maximum())
     {
-      maximum = r;
+      maximum() = r;
     }
   }
 }
@@ -113,4 +114,5 @@ statistician operator *(double scale, const statistician& s)
   statistician product;
   product.next(s.length() * scale);
   return product;
+}
 }
