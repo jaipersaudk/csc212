@@ -1,8 +1,9 @@
 #include <iostream>
 #include "stats.h"
-#include "stats.cpp"
+//#include "stats.cpp"
 
 using namespace std;
+using namespace main_savitch_2C;
 
 int main()
 {
