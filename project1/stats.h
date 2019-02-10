@@ -11,7 +11,10 @@ namespace main_savitch_2C
     statistician();
 /*     Postcondition: Object is initialized and will accept numbers from user  */
 
-/*   MEMBER functions  */
+
+
+
+/*   MEMBER Functions  */
   void next(double r);
 /*     r is the next number in the sequence of numbers  */
 
@@ -19,19 +22,6 @@ namespace main_savitch_2C
 /*     Postcondition: all numbers are cleared and is ready to accept new numbers  */
 
 
-
-
-/*     Functions to access the private variables  ---  g_something means get something     ex: g_count is get count  */
-/*     void setcount(int s_count);
- *
- *     void settotal(double s_total);
- *
- *     void setsmallest(double s_smallest);
- *
- *     void setlargest(double s_largest);
- *
- *
- */
 
 
 /*   CONSTANT member functions  */
@@ -46,21 +36,27 @@ namespace main_savitch_2C
 
   double last() const;
 
+
   double mean() const;
 /*   Precondition: length() > 0  */
 /*   Postcondition: returns the value of the mean of the sequence  */
+
 
   double minimum() const;
 /*   Precondition: length() > 0  */
 /*   Postcondition: returns the smallest number in sequence  */
 
+
   double maximum() const;
 /*   Precondition: length() > 0  */
 /*   Postcondition: returns the largest number in the sequence  */
 
+
   double abs_maximum() const;
 
+
   double abs_minimum() const;
+
 
 
 
@@ -79,11 +75,12 @@ namespace main_savitch_2C
   double total; //sum of all #'s in the sequence
   double smallest; //smallest # in the sequence
   double largest; //largest # in the sequence
-  double abs_min;
-  double abs_max;
-  double recent;
+  double abs_min; //smallest # after taking absolute value
+  double abs_max; //largest # after taking absolute value
+  double recent; //the most recent number entered
 
 };
+
 
 /* NON-MEMBER functions  */
 bool operator ==(const statistician& s1, const statistician& s2);

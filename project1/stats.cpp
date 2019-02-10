@@ -11,46 +11,39 @@ statistician::statistician()
 {
   count = 0;
   total = 0.0;
-  smallest = 1000000000.0;  //is there a better way to set max and min?
-  largest = -100000000.0;
-  abs_min = smallest;
-  abs_max = largest;
 }
 
 
 void statistician::next(double r)
 {
-  double a, b;
+  double temp_min, temp_max, temp_absmin, temp_absmax;
   if (count >= 0)
   {
-    /*count = 1;
-    total = r;*/
-    /*a = smallest;
-    b = largest;*/
-    //return;
-
     count = count + 1;
     total = total + r;
+    recent = r;
 
 /* keeping track of max and min  */
+    temp_min = r;
+    temp_max = r;
+    if (temp_min < smallest)
+      smallest = temp_min;
 
-    if (r < smallest)
-      smallest = r;
-
-    if (r > largest)
-      largest = r;
+    if (temp_max > largest)
+      largest = temp_max;
 
 /* keeping track of absolute max and min  */
+    temp_absmin = abs(r);
+    //abs_min = smallest;
+    if (temp_absmin < abs_min) {
+      abs_min = temp_absmin;
+    }
 
-    a = abs(r);
-    if (a < abs_min)
-      abs_min = a;
-
-    b = abs(r);
-    if (b > abs_max)
-      abs_max = b;
-
-    recent = r;
+    temp_absmax = abs(r);
+    //abs_max = largest;
+    if (temp_absmax > abs_max) {
+      abs_max = temp_absmax;
+    }
   }
 }
 
@@ -61,27 +54,6 @@ void statistician::reset()
   total = 0;
 }
 
-/*
-void statistician::setcount(int s_count)
-{
-  s_count = count;
-}
-
-void statistician::settotal(double s_total)
-{
-  s_total = total;
-}
-
-void statistician::setsmallest(double s_smallest)
-{
-  s_smallest = smallest;
-}
-
-void statistician::setlargest(double s_largest)
-{
-  s_largest = largest;
-}
-*/
 
 int statistician::length() const
 {
@@ -95,6 +67,7 @@ double statistician::sum() const
 
 double statistician::last() const
 {
+  assert (count > 0);
   return recent;
 }
 
@@ -103,7 +76,6 @@ double statistician::mean() const
   double mean;
 
 /*   make sure user actually inputed a value; dont want to divide by zero  */
-
   assert (count > 0);
   mean = total/count;
   return mean;
@@ -132,16 +104,6 @@ double statistician::abs_minimum() const
 double statistician::abs_maximum() const
 {
   assert (count > 0);
-  /*double b, abs_max;
-  b = smallest * (-1);
-  if (b > largest)
-  {
-    abs_max = b;
-  }
-  else
-  {
-    abs_max = largest;
-  }*/
   return abs_max;
 }
 
@@ -153,15 +115,23 @@ bool operator ==(const statistician& s1, const statistician& s2)
 statistician operator +(const statistician& s1, const statistician& s2)
 {
   statistician summation;
-  summation.next(s1.length() + s2.length());
+  summation.next(s1.sum() + s2.sum());
   return summation;
 }
 
-
+/* If the scalar was inserted first ( w = 2*u)  */
 statistician operator *(double scale, const statistician& s)
 {
   statistician product;
-  product.next(s.length() * scale);
+  product.next(s.sum() * scale);
+  return product;
+}
+
+/* If the scalar was inserted second ( w = u*2)  */
+statistician operator *(const statistician& s, double scale)
+{
+  statistician product;
+  product.next(s.sum() * scale);
   return product;
 }
 }
