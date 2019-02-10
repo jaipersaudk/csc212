@@ -1,5 +1,6 @@
 #include "stats.h"
 #include <cassert>
+#include <cmath>
 
 
 namespace main_savitch_2C
@@ -10,14 +11,16 @@ statistician::statistician()
 {
   count = 0;
   total = 0.0;
-  smallest = 0.0;
-  largest = 0.0;
+  smallest = 1000000000.0;  //is there a better way to set max and min?
+  largest = -100000000.0;
+  abs_min = smallest;
+  abs_max = largest;
 }
 
 
 void statistician::next(double r)
 {
-  // double a, b, recent;
+  double a, b;
   if (count >= 0)
   {
     /*count = 1;
@@ -29,15 +32,25 @@ void statistician::next(double r)
     count = count + 1;
     total = total + r;
 
-/*     keeping track of max and min      */
+/* keeping track of max and min  */
+
     if (r < smallest)
-    {
       smallest = r;
-    }
+
     if (r > largest)
-    {
       largest = r;
-    }
+
+/* keeping track of absolute max and min  */
+
+    a = abs(r);
+    if (a < abs_min)
+      abs_min = a;
+
+    b = abs(r);
+    if (b > abs_max)
+      abs_max = b;
+
+    recent = r;
   }
 }
 
@@ -80,6 +93,11 @@ double statistician::sum() const
   return total;
 }
 
+double statistician::last() const
+{
+  return recent;
+}
+
 double statistician::mean() const
 {
   double mean;
@@ -93,12 +111,38 @@ double statistician::mean() const
 
 double statistician::minimum() const
 {
+  assert (count > 0);
   return smallest;
 }
 
 double statistician::maximum() const
 {
+  assert (count > 0);
   return largest;
+}
+
+
+double statistician::abs_minimum() const
+{
+  assert (count > 0);
+  return abs_min;
+}
+
+
+double statistician::abs_maximum() const
+{
+  assert (count > 0);
+  /*double b, abs_max;
+  b = smallest * (-1);
+  if (b > largest)
+  {
+    abs_max = b;
+  }
+  else
+  {
+    abs_max = largest;
+  }*/
+  return abs_max;
 }
 
 bool operator ==(const statistician& s1, const statistician& s2)

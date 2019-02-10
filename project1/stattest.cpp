@@ -20,15 +20,18 @@ int main()
   s.next(-64);
   s.next(-40);
   s.next(25);
-  s.next(24);
+  s.next(-4);
   s.next(-34);
-  s.next(19);
+  s.next(-100);
 
   cout << "Mean " << s.mean() << endl;
   cout << "Total: " << s.length() << endl;
   cout << "Sum: " << s.sum() << endl;
   cout << "Smallest: " << s.minimum() << endl;
   cout << "Maximum: " << s.maximum() << endl;
+  cout << "Absolute Max: " << s.abs_maximum() << endl;
+  cout << "Absolute Min: " << s.abs_minimum() << endl;
+  cout << "Recent: " << s.last() << endl;
 
   return 0;
 }

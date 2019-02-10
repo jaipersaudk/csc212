@@ -44,6 +44,8 @@ namespace main_savitch_2C
 /*   Postcondition: returns the sum of all numbers in the sequence  (TOTAL)*/
 
 
+  double last() const;
+
   double mean() const;
 /*   Precondition: length() > 0  */
 /*   Postcondition: returns the value of the mean of the sequence  */
@@ -56,6 +58,9 @@ namespace main_savitch_2C
 /*   Precondition: length() > 0  */
 /*   Postcondition: returns the largest number in the sequence  */
 
+  double abs_maximum() const;
+
+  double abs_minimum() const;
 
 
 
@@ -74,6 +79,8 @@ namespace main_savitch_2C
   double total; //sum of all #'s in the sequence
   double smallest; //smallest # in the sequence
   double largest; //largest # in the sequence
+  double abs_min;
+  double abs_max;
   double recent;
 
 };
