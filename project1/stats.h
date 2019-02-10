@@ -22,24 +22,26 @@ namespace main_savitch_2C
 
 
 /*     Functions to access the private variables  ---  g_something means get something     ex: g_count is get count  */
-    void getCount(int g_count);
-
-    void getTotal(double g_total);
-
-    void getSmallest(double g_smallest);
-
-    void getLargest(double g_largest);
-
-
+/*     void setcount(int s_count);
+ *
+ *     void settotal(double s_total);
+ *
+ *     void setsmallest(double s_smallest);
+ *
+ *     void setlargest(double s_largest);
+ *
+ *
+ */
 
 
 /*   CONSTANT member functions  */
 
   int length() const;
-/*   Postcondition: Returns the length of the sequence (# of times next(r) has been activated)  */
+/*   Postcondition: Returns the length of the sequence (# of times next(r) has been activated) (COUNT) */
+
 
   double sum() const;
-/*   Postcondition: returns the sum of all numbers in the sequence  */
+/*   Postcondition: returns the sum of all numbers in the sequence  (TOTAL)*/
 
 
   double mean() const;
@@ -72,6 +74,7 @@ namespace main_savitch_2C
   double total; //sum of all #'s in the sequence
   double smallest; //smallest # in the sequence
   double largest; //largest # in the sequence
+  double recent;
 
 };
 

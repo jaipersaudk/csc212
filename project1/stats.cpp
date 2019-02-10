@@ -14,19 +14,22 @@ statistician::statistician()
   largest = 0.0;
 }
 
-void statistician::next(double r) {
-  if (count<=0)
+
+void statistician::next(double r)
+{
+  // double a, b, recent;
+  if (count >= 0)
   {
-    count = 1;
-    total = r;
-    smallest = r;
-    largest = r;
-    return;
+    /*count = 1;
+    total = r;*/
+    /*a = smallest;
+    b = largest;*/
+    //return;
 
-    count = count +1;
-    total += r;
+    count = count + 1;
+    total = total + r;
 
-/*     keeping track of max and min  */
+/*     keeping track of max and min      */
     if (r < smallest)
     {
       smallest = r;
@@ -45,26 +48,27 @@ void statistician::reset()
   total = 0;
 }
 
-void statistician::getCount(int g_count)
+/*
+void statistician::setcount(int s_count)
 {
-  g_count = count;
+  s_count = count;
 }
 
-void statistician::getTotal(double g_total)
+void statistician::settotal(double s_total)
 {
-  g_total = total;
+  s_total = total;
 }
 
-void statistician::getSmallest(double g_smallest)
+void statistician::setsmallest(double s_smallest)
 {
-  g_smallest = smallest;
+  s_smallest = smallest;
 }
 
-void statistician::getLargest(double g_largest)
+void statistician::setlargest(double s_largest)
 {
-  g_largest = largest;
+  s_largest = largest;
 }
-
+*/
 
 int statistician::length() const
 {
