@@ -6,7 +6,7 @@
 namespace main_savitch_2C
 {
 
-/* constructor - setting initial values for private variables  */
+/* constructor - setting initial values for some private variables  */
 statistician::statistician()
 {
   count = 0;
@@ -24,29 +24,34 @@ void statistician::next(double r)
     recent = r;
 
 /* keeping track of max and min  */
-    temp_min = r;
-    temp_max = r;
-    if (temp_min < smallest)
-      smallest = temp_min;
-
-    if (temp_max > largest)
-      largest = temp_max;
-
-/* keeping track of absolute max and min  */
-    temp_absmin = abs(r);
-    //abs_min = smallest;
-    if (temp_absmin < abs_min) {
-      abs_min = temp_absmin;
+    if (count == 1) {
+      smallest = r;
+      largest = r;
+      abs_min = abs(r);
+      abs_max = abs(r);
     }
 
-    temp_absmax = abs(r);
-    //abs_max = largest;
-    if (temp_absmax > abs_max) {
-      abs_max = temp_absmax;
+    else {
+      temp_min = r;
+      temp_max = r;
+
+      if (temp_min < smallest)
+        smallest = temp_min;
+
+      if (temp_max > largest)
+        largest = temp_max;
+
+/* keeping track of absolute max and min  */
+      temp_absmin = abs(r);
+      if (temp_absmin < abs_min)
+        abs_min = temp_absmin;
+
+      temp_absmax = abs(r);
+      if (temp_absmax > abs_max)
+        abs_max = temp_absmax;
     }
   }
 }
-
 
 void statistician::reset()
 {
@@ -119,7 +124,7 @@ statistician operator +(const statistician& s1, const statistician& s2)
   return summation;
 }
 
-/* If the scalar was inserted first ( w = 2*u)  */
+/* If the scalar was inserted first ( EX: w = 2*u)  */
 statistician operator *(double scale, const statistician& s)
 {
   statistician product;
@@ -127,7 +132,7 @@ statistician operator *(double scale, const statistician& s)
   return product;
 }
 
-/* If the scalar was inserted second ( w = u*2)  */
+/* If the scalar was inserted second ( EX: w = u*2)  */
 statistician operator *(const statistician& s, double scale)
 {
   statistician product;

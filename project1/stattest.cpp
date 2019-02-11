@@ -16,6 +16,7 @@ int main()
   statistician m;
   bool equal;
 
+/* Testing + and * operations  */
   r.next(1);
   r.next(2);
   t.next(3);
@@ -24,31 +25,34 @@ int main()
 
   m = 2*t;
   a = r+t;
+  equal = r == t;
+  cout << "Are r and t equal: " << equal << endl;
   cout << "Statistician r + s: " << a.sum() << endl;
   cout << "Statistician r * s: " << m.sum() << endl;
 
-  s.next(18);
-  s.next(-65);
-  s.next(-57);
-  s.next(23);
-  s.next(32);
+/* Testing Member Functions and == operator*/
+  s.next(-55);
+  s.next(46);
+  s.next(-88);
+  s.next(-85);
+  s.next(79);
 
-  u.next(18);
-  u.next(-65);
-  u.next(-57);
-  u.next(23);
-  u.next(32);
+  u.next(79);
+  u.next(-85);
+  u.next(-88);
+  u.next(46);
+  u.next(-55);
 
   equal = s == u;
-  cout << "Are the sets of numbers equal: " << equal << endl;
+  cout << "Are s and u equal: " << equal << endl;
 
   cout << "Sum: " << s.sum() << endl;
   cout << "Total: " << s.length() << endl;
   cout << "Mean " << s.mean() << endl;
   cout << "Smallest: " << s.minimum() << endl;
   cout << "Largest: " << s.maximum() << endl;
-  cout << "Absolute Max: " << s.abs_maximum() << endl;
   cout << "Absolute Min: " << s.abs_minimum() << endl;
+  cout << "Absolute Max: " << s.abs_maximum() << endl;
   cout << "Most Recent: " << s.last() << endl;
 
   return 0;
