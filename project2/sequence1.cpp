@@ -24,7 +24,7 @@ namespace main_savitch_3
     ++current_index;
   }
 
-/* MINE - TWO DIFFERENT ONES
+/* ORIGINAL AND NEW ONE
   void sequence::insert(const value_type& entry)
   {
 
@@ -51,6 +51,8 @@ namespace main_savitch_3
 
   }
 */
+
+/*
   void sequence::insert(const value_type& entry)
   {
     assert(size() < CAPACITY);
@@ -62,6 +64,23 @@ namespace main_savitch_3
       used++;
     }
 
+  }
+*/
+
+//MINE
+  void sequence::insert(const value_type& entry)
+  {
+    assert(size() < CAPACITY);
+
+    if(!is_item())
+      current_index = 0;
+
+    for (size_type i = used; i > current_index; --i)
+    {
+      data[i] = data[i-1];
+    }
+    data[current_index] = entry;
+    ++used;
   }
 
 
@@ -100,11 +119,11 @@ namespace main_savitch_3
 
   void sequence::remove_current()
   {
-    //assert(is_item());
+    assert(is_item());
     size_type index;
     for (index = current_index + 1; index < used; ++index)
     {
-      data[index-1] = data[index];
+      data[index-1] = data[index]; //move everything leftward
     }
     --used;
   }
