@@ -20,20 +20,55 @@ namespace main_savitch_3
 
   void sequence::advance()
   {
-    //assert( is_item() );
+    //assert(is_item());
     ++current_index;
   }
 
-
+/* MINE - TWO DIFFERENT ONES
   void sequence::insert(const value_type& entry)
   {
+
     assert(size() < CAPACITY);
     data[used] = entry;
     ++used;
+
+
+
+    assert(size() < CAPACITY);
+    if (!is_item()) //check to see if there is a current item
+      current_index = used;
+
+    for (size_t i = used; i > current_index; i--)
+    {
+      data[i] = data[i-1];
+      data[current_index] = entry;
+      used++;
+    }
+
+    data[current_index] = entry;
+    ++current_index;
+    ++used;
+
   }
+*/
+  void sequence::insert(const value_type& entry)
+  {
+    assert(size() < CAPACITY);
+
+    for (int i = used; i > current_index; i--)
+    {
+      data[i] = data[i-1];
+      data[current_index] = entry;
+      used++;
+    }
+
+  }
+
+
 
   void sequence::attach(const value_type& entry)
   {
+
     size_type index;
     assert( size() < CAPACITY);
     if ( !is_item() )
@@ -44,15 +79,28 @@ namespace main_savitch_3
     {
       data[index] = data[index-1];
     }
+    data[current_index+1] = entry;
     ++current_index;
-    data[current_index] = entry;
     ++used;
   }
 
 
+/* NOT MINE
+  void sequence::attach(const value_type& entry)
+  {
+    assert(size() < CAPACITY);
+    for (int i = used; i > current_index; i--)
+    {
+      data[i] = data[i+1];
+      data[current_index] = entry;
+      used++;
+    }
+  }
+*/
+
   void sequence::remove_current()
   {
-    //assert( is_item() );
+    //assert(is_item());
     size_type index;
     for (index = current_index + 1; index < used; ++index)
     {
@@ -74,7 +122,7 @@ namespace main_savitch_3
 
   sequence::value_type sequence::current() const
   {
-    //assert( is_item() );
+    //assert(is_item());
     return data[current_index];
   }
 }
