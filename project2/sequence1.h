@@ -57,7 +57,7 @@ namespace main_savitch_3
     private:
       value_type data[CAPACITY]; //an array to store items
       size_type used; //how much of the array is used
-      size_type current_index;
+      size_type current_index; //current index of the array
   };
 }
 

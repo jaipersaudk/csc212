@@ -14,7 +14,6 @@
 #include <iostream>   // Provides cout.
 #include <cstdlib>    // Provides size_t.
 #include "sequence1.h"    // Provides the sequence class with double items.
-#include "sequence1.cpp"
 using namespace std;
 using namespace main_savitch_3;
 
