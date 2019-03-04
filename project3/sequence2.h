@@ -25,7 +25,7 @@
 //
 // MODIFICATION MEMBER FUNCTIONS for the sequence class:
 //   void resize(size_type new_capacity)
-//     Postcondition: The sequence's current capacity is changed to the 
+//     Postcondition: The sequence's current capacity is changed to the
 //     new_capacity (but not less that the number of items already on the
 //     list). The insert/attach functions will work efficiently (without
 //     allocating new memory) until this new capacity is reached.
@@ -42,13 +42,13 @@
 //
 //   void insert(const value_type& entry)
 //     Postcondition: A new copy of entry has been inserted in the sequence
-//     before the current item. If there was no current item, then the new entry 
+//     before the current item. If there was no current item, then the new entry
 //     has been inserted at the front of the sequence. In either case, the newly
 //     inserted item is now the current item of the sequence.
 //
 //   void attach(const value_type& entry)
 //     Postcondition: A new copy of entry has been inserted in the sequence after
-//     the current item. If there was no current item, then the new entry has 
+//     the current item. If there was no current item, then the new entry has
 //     been attached to the end of the sequence. In either case, the newly
 //     inserted item is now the current item of the sequence.
 //
@@ -76,7 +76,7 @@
 //
 // DYNAMIC MEMORY USAGE by the List
 //   If there is insufficient dynamic memory, then the following functions
-//   throw a BAD_ALLOC exception: The constructors, insert, attach. 
+//   throw a BAD_ALLOC exception: The constructors, insert, attach.
 
 #ifndef MAIN_SAVITCH_SEQUENCE_H
 #define MAIN_SAVITCH_SEQUENCE_H
@@ -91,29 +91,32 @@ namespace main_savitch_4
         typedef double value_type;
         typedef std::size_t size_type;
         static const size_type DEFAULT_CAPACITY = 30;
+
         // CONSTRUCTORS and DESTRUCTOR
         sequence(size_type initial_capacity = DEFAULT_CAPACITY);
         sequence(const sequence& source);
-	~sequence( );
+	      ~sequence( );
+
         // MODIFICATION MEMBER FUNCTIONS
-	void resize(size_type new_capacity);
+	      void resize(size_type new_capacity);
         void start( );
         void advance( );
         void insert(const value_type& entry);
         void attach(const value_type& entry);
         void remove_current( );
         void operator =(const sequence& source);
+
         // CONSTANT MEMBER FUNCTIONS
         size_type size( ) const;
         bool is_item( ) const;
         value_type current( ) const;
+
     private:
         value_type* data;
         size_type used;
         size_type current_index;
-	size_type capacity;
+	      size_type capacity;
     };
 }
 
 #endif
-
