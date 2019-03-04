@@ -23,5 +23,6 @@ int main()
 {
   std::cout << "hello world" << '\n';
   cout << "it works" << endl;
+  cout << "test #2" << endl;
   return 0;
 }
