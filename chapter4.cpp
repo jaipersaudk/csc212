@@ -22,5 +22,6 @@ int main()
 int main()
 {
   std::cout << "hello world" << '\n';
+  cout << "it works" << endl;
   return 0;
 }
