@@ -25,5 +25,6 @@ int main()
   cout << "it works" << endl;
   cout << "test #3" << endl;
   cout << "test #4" << endl;
+  cout << "test #5" << endl;
   return 0;
 }
