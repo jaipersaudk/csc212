@@ -94,7 +94,7 @@ namespace main_savitch_4
 
         // CONSTRUCTORS and DESTRUCTOR
         sequence(size_type initial_capacity = DEFAULT_CAPACITY);
-        sequence(const sequence& source);
+        sequence(const sequence& source); //copy constructor
 	      ~sequence( );
 
         // MODIFICATION MEMBER FUNCTIONS
