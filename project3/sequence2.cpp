@@ -13,27 +13,27 @@ namespace main_savitch_4
     capacity = initial_capacity;
     used = 0;
     current_index = 0;
-    if (initial_capacity < 1)
-      capacity = 1;
+    //if (initial_capacity < 1)
+      //capacity = 1;
   }
 
   sequence::sequence(const sequence& source)
   {
+    data = new value_type[source.capacity];
+    capacity = source.capacity;
     used = source.used;
     current_index = source.current_index;
-    capacity = source.capacity;
-    data = new value_type[source.capacity];
-    for (size_type i = 0; i < used; ++i)
+    for (size_type i = 0; i < used; i++)
     {
       data[i] = source.data[i];
     }
   }
 
   sequence::~sequence()
-  {
-    delete [] data;
-    data = NULL;
-  }
+   {
+  //   delete [] data;
+  //   data = NULL;
+   }
 
   // MODIFICATION MEMBER FUNCTIONS
 
@@ -56,7 +56,7 @@ namespace main_savitch_4
         temp_arr[i] = data[i];
       }
 
-      delete [] data;
+      //delete [] data;
       data = temp_arr;
   }
 
@@ -124,7 +124,7 @@ namespace main_savitch_4
   void sequence::remove_current( )
   {
     assert(is_item());
-    for (size_t i = current_index; i < used - 1; ++i)
+    for (size_t i = current_index; i < used; ++i)
     {
       data[i] = data[i+1];
     }
@@ -140,7 +140,7 @@ namespace main_savitch_4
     if (capacity != source.capacity)
     {
       new_data = new value_type[source.capacity];
-      delete [] data;
+      //delete [] data;
       data = new_data;
       capacity = source.capacity;
     }
