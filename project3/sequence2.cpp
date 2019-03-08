@@ -34,7 +34,7 @@ namespace main_savitch_4
   {
       value_type* big_array; //create a new array
 
-      if(new_capacity = capacity)
+      if ((new_capacity = capacity))
         return; //check if the new allocated memory is the same size as the old one
 
       if (new_capacity < used)
@@ -60,22 +60,72 @@ namespace main_savitch_4
 
   void sequence::insert(const value_type& entry)
   {
+    // check if the array is full
+    if (used == capacity)
+      resize((capacity*2)+1);
 
+    if(!is_item())
+      current_index = 0;
+
+    for (size_type i = used; i > current_index; --i)
+    {
+      data[i] = data[i-1];
+    }
+    data[current_index] = entry;
+    ++used;
+    // data[current_index] = entry;
+    // ++current_index;
+    // ++used;
   }
 
   void sequence::attach(const value_type& entry)
   {
+    if(used == capacity)
+      resize((capacity*2)+1);
+
+    if (!is_item())
+      current_index = used-1;
+
+    for (size_type i = used; i > current_index + 1; --i)
+    {
+      data[i] = data[i-1];
+    }
+    data[current_index+1] = entry;
+    ++current_index;
+    ++used;
+
+    // data[current_index+1] = entry;
+    // ++current_index;
+    // ++used;
 
   }
 
   void sequence::remove_current( )
   {
-
+    assert(is_item());
+    for (size_t i = current_index; i < used; ++i)
+    {
+      data[i] = data[i+1];
+    }
+    --used;
   }
 
   void sequence::operator =(const sequence& source)
   {
+    value_type* new_data;
+    if (this == &source)
+      return;
 
+    if (capacity != source.capacity)
+    {
+      new_data = new value_type[source.capacity];
+      delete [] data;
+      data = new_data;
+      capacity = source.capacity;
+    }
+
+    used = source.used;
+    // copy(source.data, source.data + used, data);
   }
 
 
@@ -85,7 +135,7 @@ namespace main_savitch_4
     return used;
   }
 
-  bool sequence::is_item()
+  bool sequence::is_item() const
   {
     return (current_index < used);
   }
@@ -94,6 +144,5 @@ namespace main_savitch_4
   {
     return current_index;
   }
-
 
 }
