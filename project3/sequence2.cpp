@@ -13,8 +13,6 @@ namespace main_savitch_4
     capacity = initial_capacity;
     used = 0;
     current_index = 0;
-    //if (initial_capacity < 1)
-      //capacity = 1;
   }
 
   sequence::sequence(const sequence& source)
@@ -32,16 +30,37 @@ namespace main_savitch_4
   }
 
   sequence::~sequence()
-   {
-     //delete [] data;
-     //data = NULL;
-   }
+  {
+     delete [] data;
+  }
 
   // MODIFICATION MEMBER FUNCTIONS
 
   void sequence::resize(size_type new_capacity)
   {
-      value_type* temp_arr; //create a new array
+    /*
+    value_type* temp_arr; //create a new array
+
+    if (new_capacity == capacity)
+      return; //check if the new allocated memory is the same size as the old one
+
+    if (new_capacity < used)
+      new_capacity = used;
+
+    //if (new_capacity < 1)
+      //new_capacity = 1;
+
+    temp_arr = new value_type[new_capacity];
+    for (size_type i = 0; i < used; ++i)
+    {
+      temp_arr[i] = data[i];
+    }
+
+    delete [] data;
+    data = temp_arr;
+    capacity = new_capacity;
+    */
+    value_type* temp_arr; //create a new array
 
       if ((new_capacity = capacity))
         return; //check if the new allocated memory is the same size as the old one
@@ -58,7 +77,7 @@ namespace main_savitch_4
         temp_arr[i] = data[i];
       }
 
-      //delete [] data;
+      delete [] data;
       data = temp_arr;
   }
 
@@ -70,14 +89,22 @@ namespace main_savitch_4
   void sequence::advance()
   {
     assert(is_item());
-    current_index = current_index + 1;
+    ++current_index;
   }
 
   void sequence::insert(const value_type& entry)
   {
+    /*
+    if(used == capacity)
+      resize(used*2+1);
+
+    data[used] = entry;
+    ++used;
+    */
+
     // check if the array is full
     if (used == capacity)
-      resize(size_type(capacity*2)+1);
+      resize((capacity*2)+1);
 
     if(!is_item())
     {
@@ -88,8 +115,8 @@ namespace main_savitch_4
       }
       data[current_index] = entry;
       ++used;
-    }
 
+    }
     else
     {
       for (size_type i = used + 1; i > current_index; --i)
@@ -99,12 +126,13 @@ namespace main_savitch_4
       data[current_index] = entry;
       ++used;
     }
+
   }
 
   void sequence::attach(const value_type& entry)
   {
     if(used == capacity)
-      resize(size_type(capacity*2)+1);
+      resize((capacity*2)+1);
 
     if (!is_item())
     {
@@ -126,12 +154,25 @@ namespace main_savitch_4
   void sequence::remove_current( )
   {
     assert(is_item());
-    for (size_t i = current_index; i < used; ++i)
+
+    for (size_type i = current_index; i < used; ++i)
     {
-      data[i] = data[i+1];
+      data[i] = data[i+1]; //move everything leftward
     }
     --used;
   }
+
+  /* void sequence::remove_current( )
+  {
+     assert(is_item( ));
+
+     for (size_type i = current_index + 1; i < used; ++i )
+     {
+       data[i-1] = data[i];
+     }
+     --used;
+  }
+  */
 
   void sequence::operator =(const sequence& source)
   {
@@ -149,7 +190,10 @@ namespace main_savitch_4
 
     used = source.used;
     for (size_type i = 0; i < used; i++)
+    {
       data[i] = source.data[i];
+    }
+
   }
 
   // CONSTANT MEMBER FUNCTIONS
@@ -166,7 +210,7 @@ namespace main_savitch_4
   sequence::value_type sequence::current() const
   {
     assert(is_item());
-    return current_index;
+    return data[current_index];
   }
 
 }
