@@ -27,12 +27,14 @@ namespace main_savitch_4
     {
       data[i] = source.data[i];
     }
+
+    //delete [] data;
   }
 
   sequence::~sequence()
    {
-  //   delete [] data;
-  //   data = NULL;
+     //delete [] data;
+     //data = NULL;
    }
 
   // MODIFICATION MEMBER FUNCTIONS
@@ -140,14 +142,15 @@ namespace main_savitch_4
     if (capacity != source.capacity)
     {
       new_data = new value_type[source.capacity];
-      //delete [] data;
+      delete [] data;
       data = new_data;
       capacity = source.capacity;
     }
 
     used = source.used;
+    for (size_type i = 0; i < used; i++)
+      data[i] = source.data[i];
   }
-
 
   // CONSTANT MEMBER FUNCTIONS
   sequence::size_type sequence::size() const
