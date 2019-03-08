@@ -11,7 +11,7 @@
 // constants POINTS[1], POINTS[2]...
 
 #include <iostream>    // Provides cout.
-#include <string>      // Provides memcpy.
+#include <cstring>      // Provides memcpy.
 #include <cstdlib>     // Provides size_t.
 #include "sequence2.h" // Provides the Sequence class with double items.
 using namespace std;
@@ -57,7 +57,7 @@ bool test_basic(const sequence& test, size_t s, bool has_cursor)
     cout.flush( );
     answer = (test.size( ) == s);
     cout << (answer ? "Passed." : "Failed.") << endl;
-    
+
     if (answer)
     {
         cout << "Testing that is_item() returns ";
@@ -85,7 +85,7 @@ bool test_basic(const sequence& test, size_t s, bool has_cursor)
 bool test_items(sequence& test, size_t s, size_t i, double items[])
 {
     bool answer = true;
-    
+
     cout << "The cursor should be at item [" << i << "]" << " of the sequence\n";
     cout << "(counting the first item as [0]). I will advance the cursor\n";
     cout << "to the end of the sequence, checking that each item is correct...";
@@ -133,7 +133,7 @@ bool test_items(sequence& test, size_t s, size_t i, double items[])
 // **************************************************************************
 bool correct(sequence& test, size_t size, size_t cursor_spot, double items[])
 {
-    bool has_cursor = (cursor_spot < size); 
+    bool has_cursor = (cursor_spot < size);
 
     // Check the sequence's size and whether it has a cursor.
     if (!test_basic(test, size, has_cursor))
@@ -184,13 +184,13 @@ int test1( )
     cout << "I am now using attach to put 10 into an empty sequence." << endl;
     test.attach(10);
     if (!correct(test, 1, 0, items2)) return 0;
-    
+
     // Test the insert function to add something to an empty sequence
     cout << "I am now using insert to put 10 into an empty sequence." << endl;
     test = empty;
     test.insert(10);
     if (!correct(test, 1, 0, items2)) return 0;
-    
+
     // Test the insert function to add an item at the front of a sequence
     cout << "I am now using attach to put 10,20,30 in an empty sequence.\n";
     cout << "Then I move the cursor to the start and insert 5." << endl;
@@ -201,7 +201,7 @@ int test1( )
     test.start( );
     test.insert(5);
     if (!correct(test, 4, 0, items1)) return 0;
-    
+
     // Test the insert function to add an item in the middle of a sequence
     cout << "I am now using attach to put 10,20,30 in an empty sequence.\n";
     cout << "Then I move the cursor to the start, advance once, ";
@@ -272,7 +272,7 @@ int test2( )
         return false;
     }
     cout << " passed." << endl;
-    
+
     // Attach more items until the sequence becomes full.
     // Note that the first attach should attach to the end of the sequence.
     cout << "Calling attach to put the numbers 40, 50, 60 ...";
@@ -300,7 +300,7 @@ int test2( )
     }
 
     // All tests passed
-    cout << "All tests of this second function have been passed." << endl;    
+    cout << "All tests of this second function have been passed." << endl;
     return POINTS[2];
 }
 
@@ -329,7 +329,7 @@ int test3( )
     double items1[1] = { 30 };
     double items2[2] = { 10, 30 };
     double items3[3] = { 10, 20, 30 };
-    
+
     size_t i;       // for-loop control variable
     char *char_ptr; // Variable to loop at each character in a sequence's memory
 
@@ -422,9 +422,9 @@ int test3( )
             cout << "Illegal array access detected." << endl;
             return POINTS[3] / 4;
         }
-                                        
+
     // All tests passed
-    cout << "All tests of this third function have been passed." << endl;    
+    cout << "All tests of this third function have been passed." << endl;
     return POINTS[3];
 }
 
@@ -448,7 +448,7 @@ int test4( )
     test.resize(2*test.DEFAULT_CAPACITY);
     test.attach(0);
     memcpy(bytes, (char *) &test, sizeof(sequence));
-   
+
     // At this point, I should be able to insert 2*DEFAULT_CAPACITY-1
     // more items without calling resize again. Therefore, at most 1 byte
     // of the object will change (the least significant byte of used).
@@ -457,7 +457,7 @@ int test4( )
         test.attach(i);
     test.start( );
     memcpy(newbytes, (char *) &test, sizeof(sequence));
-     
+
     for (i = 0; i < 2*test.DEFAULT_CAPACITY; i++)
     {
         if (test.current( ) != i)
@@ -468,7 +468,7 @@ int test4( )
         test.advance( );
     }
     test.start( );
-     
+
     mismatches = 0;
     for (i = 0; i < sizeof(sequence); i++)
         if (bytes[i] != newbytes[i])
@@ -480,7 +480,7 @@ int test4( )
     }
     else
         cout << "    Test passed." << endl;
-     
+
     cout << "Now I will call resize(1) for the sequence, but the actual\n";
     cout << "sequence should not change because the sequence already has \n";
     cout << test.DEFAULT_CAPACITY*2 << " items." << endl;
@@ -499,7 +499,7 @@ int test4( )
         cout << "    Test passed." << endl;
 
     // All tests passed
-    cout << "All tests of this fourth function have been passed." << endl;    
+    cout << "All tests of this fourth function have been passed." << endl;
     return POINTS[4];
 }
 
@@ -518,7 +518,7 @@ int test5( )
     // Set up the items array to conatin 1...2*DEFAULT_CAPACITY.
     for (i = 1; i <= 2*original.DEFAULT_CAPACITY; i++)
         items[i-1] = i;
-    
+
     // Test copying of an empty sequence. After the copying, we change the original.
     cout << "Copy constructor test: for an empty sequence." << endl;
     sequence copy1(original);
@@ -583,9 +583,9 @@ int test5( )
         return 0;
 
     // All tests passed
-    cout << "All tests of this fifth function have been passed." << endl;    
+    cout << "All tests of this fifth function have been passed." << endl;
     return POINTS[5];
-} 
+}
 
 
 // **************************************************************************
@@ -602,7 +602,7 @@ int test6( )
     // Set up the items array to conatin 1...2*DEFAULT_CAPACITY.
     for (i = 1; i <= 2*original.DEFAULT_CAPACITY; i++)
         items[i-1] = i;
-    
+
     // Test copying of an empty sequence. After the copying, we change the original.
     cout << "Assignment operator test: for an empty sequence." << endl;
     sequence copy1;
@@ -680,9 +680,9 @@ int test6( )
         return 0;
 
     // All tests passed
-    cout << "All tests of this sixth function have been passed." << endl;    
+    cout << "All tests of this sixth function have been passed." << endl;
     return POINTS[6];
-} 
+}
 
 
 // **************************************************************************
@@ -700,7 +700,7 @@ int test7( )
     // Set up the items array to conatin 1...2*DEFAULT_CAPACITY.
     for (i = 1; i <= 2*testa.DEFAULT_CAPACITY; i++)
         items[i-1] = i;
-    
+
     cout << "Testing to see that attach works correctly when the\n";
     cout << "current capacity is exceeded." << endl;
     for (i = 1; i <= 2*testa.DEFAULT_CAPACITY; i++)
@@ -720,14 +720,14 @@ int test7( )
         return 0;
 
     // All tests passed
-    cout << "All tests of this seventh function have been passed." << endl;    
+    cout << "All tests of this seventh function have been passed." << endl;
     return POINTS[7];
-}  
+}
 
 int run_a_test(int number, const char message[], int test_function( ), int max)
 {
     int result;
-    
+
     cout << endl << "START OF TEST " << number << ":" << endl;
     cout << message << " (" << max << " points)." << endl;
     result = test_function( );
@@ -739,7 +739,7 @@ int run_a_test(int number, const char message[], int test_function( ), int max)
     else
         cout << "Test " << number << " failed." << endl;
     cout << "END OF TEST " << number << "." << endl << endl;
-    
+
     return result;
 }
 
@@ -752,8 +752,8 @@ int run_a_test(int number, const char message[], int test_function( ), int max)
 int main( )
 {
     int sum = 0;
-    
-    
+
+
     cout << "Running " << DESCRIPTION[0] << endl;
 
     sum += run_a_test(1, DESCRIPTION[1], test1, POINTS[1]);
@@ -767,7 +767,7 @@ int main( )
     cout << "If you submit this sequence to Dora now, you will have\n";
     cout << sum << " points out of the " << POINTS[0];
     cout << " points from this test program.\n";
-    
+
     return EXIT_SUCCESS;
 
 }
