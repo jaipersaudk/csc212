@@ -215,7 +215,7 @@ namespace main_savitch_4
   {
     value_type* new_data;
     if (this == &source)
-      return(*this);
+      return;
 
     if (capacity != source.capacity)
     {
@@ -230,7 +230,7 @@ namespace main_savitch_4
     {
       data[i] = source.data[i];
     }
-    return (*this);
+    return;
   }
 
   // CONSTANT MEMBER FUNCTIONS
