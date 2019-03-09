@@ -26,7 +26,7 @@ namespace main_savitch_4
       data[i] = source.data[i];
     }
 
-    //delete [] data; do i need this??
+    delete [] data; //do i need this??
   }
 
   sequence::~sequence()
@@ -76,7 +76,7 @@ namespace main_savitch_4
     if (used == capacity)
       resize((capacity*2)+1);
 
-// Cursor is outside of array or no current item
+    // Cursor is outside of array or no current item
     if(!is_item())
     {
       current_index = 0;
