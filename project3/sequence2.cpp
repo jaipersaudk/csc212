@@ -213,7 +213,7 @@ namespace main_savitch_4
 
   void sequence::operator =(const sequence& source)
   {
-    /*
+
     value_type* new_data;
     if (this == &source)
       return;
@@ -226,14 +226,15 @@ namespace main_savitch_4
       capacity = source.capacity;
     }
 
+    current_index = source.current_index;
     used = source.used;
     for (size_type i = 0; i < used; i++)
     {
       data[i] = source.data[i];
     }
-    */
-    // Another Attempt
 
+    // Another Attempt
+    /*
     if (this == &source)
       return;
 
@@ -249,7 +250,7 @@ namespace main_savitch_4
       }
     }
     return;
-
+    */
   }
 
   // CONSTANT MEMBER FUNCTIONS
