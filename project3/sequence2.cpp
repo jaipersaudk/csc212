@@ -95,15 +95,9 @@ namespace main_savitch_4
     ++current_index;
   }
 
+
   void sequence::insert(const value_type& entry)
   {
-    /*
-    if(used == capacity)
-      resize(used*2+1);
-
-    data[used] = entry;
-    ++used;
-    */
 
     // check if the array is full
     if (used == capacity)
@@ -130,8 +124,46 @@ namespace main_savitch_4
       data[current_index] = entry;
       ++used;
     }
-
   }
+
+  /*void sequence::insert(const value_type& entry)
+  {
+
+    if (used == capacity)
+      resize((capacity*2)+1);
+
+    value_type* newArray = new value_type[capacity];
+
+    if(!is_item())
+    {
+      current_index = 0;
+      for (size_type i = used + 1; i > current_index; --i)
+      {
+        data[i] = data[i-1];
+      }
+      data[current_index] = entry;
+      ++used;
+    }
+
+    else
+    {
+      for (size_type i = 0; i <= used; ++i)
+      {
+        if (i < current_index)
+        newArray[i] = data[i];
+
+        if (i == current_index)
+        newArray[i] = entry;
+
+        if (i > current_index)
+        newArray[i] = data[i-1];
+      }
+      delete [] data;
+      data = newArray;
+      ++used;
+    }
+
+  }*/
 
   void sequence::attach(const value_type& entry)
   {
