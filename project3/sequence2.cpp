@@ -1,5 +1,7 @@
 #include "sequence2.h"
 #include <cassert>
+#include <algorithm>
+using namespace std;
 
 namespace main_savitch_4
 {
@@ -226,10 +228,13 @@ namespace main_savitch_4
     }
 
     used = source.used;
+    copy(source.data, source.data + used, data);
+    /*
     for (size_type i = 0; i < used; ++i)
     {
       data[i] = source.data[i];
     }
+    */
   }
 
   // CONSTANT MEMBER FUNCTIONS
