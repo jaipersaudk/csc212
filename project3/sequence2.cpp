@@ -26,7 +26,7 @@ namespace main_savitch_4
       data[i] = source.data[i];
     }
 
-    //delete [] data;
+    //delete [] data; do i need this??
   }
 
   sequence::~sequence()
