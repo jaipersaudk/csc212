@@ -232,6 +232,8 @@ namespace main_savitch_4
       data[i] = source.data[i];
     }
     */
+    // Another Attempt
+
     if (this == &source)
       return;
 
@@ -244,6 +246,7 @@ namespace main_savitch_4
       data[i] = source.data[i];
     }
     return;
+    
   }
 
   // CONSTANT MEMBER FUNCTIONS
