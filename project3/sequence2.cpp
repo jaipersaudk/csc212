@@ -46,9 +46,6 @@ namespace main_savitch_4
     if (new_capacity < used)
       new_capacity = used;
 
-    //if (new_capacity < 1)
-      //new_capacity = 1;
-
     temp_arr = new value_type[new_capacity];
     for (size_type i = 0; i < used; ++i)
     {
@@ -58,30 +55,6 @@ namespace main_savitch_4
     delete [] data;
     data = temp_arr;
     capacity = new_capacity;
-
-    /*
-    value_type* temp_arr; //create a new array
-
-      if ((new_capacity = capacity))
-        return; //check if the new allocated memory is the same size as the old one
-
-      if (new_capacity < used)
-        capacity = used;
-
-      if (new_capacity < 1)
-        new_capacity = 1;
-
-      temp_arr = new value_type[capacity];
-      for (size_type i = 0; i < used; ++i)
-      {
-        temp_arr[i] = data[i];
-      }
-
-      delete [] data;
-      data = temp_arr;
-      //start();
-      */
-
   }
 
   void sequence::start()
@@ -126,6 +99,7 @@ namespace main_savitch_4
     }
   }
 
+// Insert function by creating new array??
   /*void sequence::insert(const value_type& entry)
   {
 
@@ -199,6 +173,7 @@ namespace main_savitch_4
     --used;
   }
 
+// Another way to for remove function??
   /* void sequence::remove_current( )
   {
      assert(is_item( ));
@@ -213,6 +188,7 @@ namespace main_savitch_4
 
   void sequence::operator =(const sequence& source)
   {
+    // Textbook Solution
     /*
     value_type* new_data;
     if (this == &source)
@@ -233,8 +209,8 @@ namespace main_savitch_4
       data[i] = source.data[i];
     }
     */
-    // Another Attempt
 
+    // Another Attempt
     if (this == &source)
       return;
 
@@ -243,7 +219,7 @@ namespace main_savitch_4
       delete [] data;
       used = source.used;
       capacity = source.capacity;
-      current_index = source.current_index;
+      current_index = source.current_index; //is this the reason why my code doesnt work????
       data = new value_type[capacity];
       for (size_type i = 0; i < used; i++)
       {
