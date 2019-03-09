@@ -79,6 +79,7 @@ namespace main_savitch_4
 
       delete [] data;
       data = temp_arr;
+      //start();
   }
 
   void sequence::start()
@@ -106,6 +107,7 @@ namespace main_savitch_4
     if (used == capacity)
       resize((capacity*2)+1);
 
+// empty sequence
     if(!is_item())
     {
       current_index = 0;
@@ -117,6 +119,7 @@ namespace main_savitch_4
       ++used;
 
     }
+
     else
     {
       for (size_type i = used + 1; i > current_index; --i)
@@ -139,6 +142,7 @@ namespace main_savitch_4
       data[current_index] = entry;
       ++used;
     }
+
     else
     {
       ++current_index;
