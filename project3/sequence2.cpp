@@ -215,7 +215,7 @@ namespace main_savitch_4
   {
     value_type* new_data;
     if (this == &source)
-      return;
+      return(*this);
 
     if (capacity != source.capacity)
     {
@@ -226,10 +226,11 @@ namespace main_savitch_4
     }
 
     used = source.used;
-    for (size_type i = 0; i < used; ++i)
+    for (size_type i = 0; i < used; i++)
     {
       data[i] = source.data[i];
     }
+    return (*this);
   }
 
   // CONSTANT MEMBER FUNCTIONS
