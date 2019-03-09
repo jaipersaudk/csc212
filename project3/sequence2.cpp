@@ -38,7 +38,6 @@ namespace main_savitch_4
 
   void sequence::resize(size_type new_capacity)
   {
-    /*
     value_type* temp_arr; //create a new array
 
     if (new_capacity == capacity)
@@ -59,7 +58,8 @@ namespace main_savitch_4
     delete [] data;
     data = temp_arr;
     capacity = new_capacity;
-    */
+
+    /*
     value_type* temp_arr; //create a new array
 
       if ((new_capacity = capacity))
@@ -80,6 +80,8 @@ namespace main_savitch_4
       delete [] data;
       data = temp_arr;
       //start();
+      */
+
   }
 
   void sequence::start()
@@ -107,7 +109,7 @@ namespace main_savitch_4
     if (used == capacity)
       resize((capacity*2)+1);
 
-// empty sequence
+// Cursor is outside of array or no current item
     if(!is_item())
     {
       current_index = 0;
@@ -117,7 +119,6 @@ namespace main_savitch_4
       }
       data[current_index] = entry;
       ++used;
-
     }
 
     else
@@ -197,7 +198,6 @@ namespace main_savitch_4
     {
       data[i] = source.data[i];
     }
-
   }
 
   // CONSTANT MEMBER FUNCTIONS
