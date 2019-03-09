@@ -26,7 +26,7 @@ namespace main_savitch_4
       data[i] = source.data[i];
     }
 
-    delete [] data; //do i need this??
+    //delete [] data; //do i need this?? program works consistently on Linux VM but not consistently with git bash and Atom
   }
 
   sequence::~sequence()
