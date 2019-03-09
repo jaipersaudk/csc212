@@ -226,7 +226,7 @@ namespace main_savitch_4
     }
 
     used = source.used;
-    for (size_type i = 0; i < used; i++)
+    for (size_type i = 0; i < used; ++i)
     {
       data[i] = source.data[i];
     }
