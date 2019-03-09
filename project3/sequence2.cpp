@@ -237,16 +237,19 @@ namespace main_savitch_4
     if (this == &source)
       return;
 
-    delete [] data;
-    used = source.used;
-    capacity = source.capacity;
-    data = new value_type[capacity];
-    for (size_type i = 0; i < used; ++i)
+    if (this != &source)
     {
-      data[i] = source.data[i];
+      delete [] data;
+      used = source.used;
+      capacity = source.capacity;
+      data = new value_type[capacity];
+      for (size_type i = 0; i < used; i++)
+      {
+        data[i] = source.data[i];
+      }
     }
     return;
-    
+
   }
 
   // CONSTANT MEMBER FUNCTIONS
