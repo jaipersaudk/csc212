@@ -213,7 +213,7 @@ namespace main_savitch_4
 
   void sequence::operator =(const sequence& source)
   {
-
+    /*
     value_type* new_data;
     if (this == &source)
       return;
@@ -226,15 +226,15 @@ namespace main_savitch_4
       capacity = source.capacity;
     }
 
-    current_index = source.current_index;
+    current_index = source.current_index; //reason why my code doesnt work???
     used = source.used;
     for (size_type i = 0; i < used; i++)
     {
       data[i] = source.data[i];
     }
-
+    */
     // Another Attempt
-    /*
+
     if (this == &source)
       return;
 
@@ -243,14 +243,14 @@ namespace main_savitch_4
       delete [] data;
       used = source.used;
       capacity = source.capacity;
+      current_index = source.current_index;
       data = new value_type[capacity];
       for (size_type i = 0; i < used; i++)
       {
         data[i] = source.data[i];
       }
     }
-    return;
-    */
+
   }
 
   // CONSTANT MEMBER FUNCTIONS
