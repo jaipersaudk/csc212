@@ -25,8 +25,6 @@ namespace main_savitch_4
     {
       data[i] = source.data[i];
     }
-
-    //delete [] data; //do i need this?? program works consistently on Linux VM but not consistently with git bash and Atom
   }
 
   sequence::~sequence()
@@ -46,6 +44,7 @@ namespace main_savitch_4
     if (new_capacity < used)
       new_capacity = used;
 
+    // copy over the values
     temp_arr = new value_type[new_capacity];
     for (size_type i = 0; i < used; ++i)
     {
@@ -88,6 +87,7 @@ namespace main_savitch_4
       ++used;
     }
 
+    // move elements one space right to insert new element
     else
     {
       for (size_type i = used + 1; i > current_index; --i)
@@ -141,6 +141,7 @@ namespace main_savitch_4
 
   void sequence::attach(const value_type& entry)
   {
+    // check if array is full
     if(used == capacity)
       resize((capacity*2)+1);
 
@@ -173,19 +174,6 @@ namespace main_savitch_4
     --used;
   }
 
-// Another way to for remove function??
-  /* void sequence::remove_current( )
-  {
-     assert(is_item( ));
-
-     for (size_type i = current_index + 1; i < used; ++i )
-     {
-       data[i-1] = data[i];
-     }
-     --used;
-  }
-  */
-
   void sequence::operator =(const sequence& source)
   {
     // Textbook Solution
@@ -202,7 +190,7 @@ namespace main_savitch_4
       capacity = source.capacity;
     }
 
-    current_index = source.current_index; //reason why my code doesnt work???
+    current_index = source.current_index;
     used = source.used;
     for (size_type i = 0; i < used; i++)
     {
@@ -210,7 +198,7 @@ namespace main_savitch_4
     }
     */
 
-    // Another Attempt
+    // Another Solution??
     if (this == &source)
       return;
 
@@ -219,14 +207,13 @@ namespace main_savitch_4
       delete [] data;
       used = source.used;
       capacity = source.capacity;
-      current_index = source.current_index; //is this the reason why my code doesnt work????
+      current_index = source.current_index;
       data = new value_type[capacity];
       for (size_type i = 0; i < used; i++)
       {
         data[i] = source.data[i];
       }
     }
-
   }
 
   // CONSTANT MEMBER FUNCTIONS
