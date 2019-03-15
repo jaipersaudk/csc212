@@ -21,7 +21,7 @@ namespace main_savitch_5
 	     for (cursor = head_ptr; cursor != NULL; cursor = cursor->link( ))
           ++answer;
 
-	         return answer;
+	     return answer;
     }
 
     void list_head_insert(node*& head_ptr, const node::value_type& entry)

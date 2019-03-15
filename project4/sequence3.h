@@ -75,8 +75,8 @@ namespace main_savitch_5
     {
     public:
       // TYPEDEFS and MEMBER CONSTANTS
-      typedef double value_type;
       typedef std::size_t size_type;
+      typedef double value_type;
 
       // CONSTRUCTORS and DESTRUCTOR
       sequence( );
