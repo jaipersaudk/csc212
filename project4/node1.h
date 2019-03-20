@@ -159,7 +159,9 @@ namespace main_savitch_5
 
 	    // Two slightly different member functions to retreive the current link:
 	    const node* link( ) const
+      {
         return link_field;
+      }
 
 
     	node* link( )

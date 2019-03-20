@@ -92,16 +92,16 @@ namespace main_savitch_5
 	    void remove_current( );
 
       // CONSTANT MEMBER FUNCTIONS
-      size_type size( ) const { return many_nodes; }
-      bool is_item( ) const { return (cursor != NULL); }
+      size_type size( ) const;
+      bool is_item( ) const;
       value_type current( ) const;
 
     private:
-      node *head_ptr;
-	    node *tail_ptr;
-	    node *cursor;
-	    node *precursor;
-	    size_type many_nodes;
+      node *head_ptr; //List head pointer
+	    node *tail_ptr; //List tail pointer
+	    node *cursor; // location of current item
+	    node *precursor; // location of item before current item
+	    size_type many_nodes; // number of nodes in the list
     };
 }
 

@@ -1,7 +1,7 @@
 #include "sequence3.h"
 #include <cassert>
 #include <cstdlib>
-#include <node1.h> //do i need this??
+//#include <node1.h> //do i need this??
 using namespace std;
 
 namespace main_savitch_5
@@ -18,23 +18,26 @@ namespace main_savitch_5
 
   sequence::sequence(const sequence& source)
   {
-
+    node* tail_ptr; // tail pointer for the new list
+    list_copy(source.head_ptr, head_ptr, tail_ptr); // source.head_ptr is the head pointer of the original list; head_ptr is the new head pointer
+    many_nodes = source.many_nodes; //keeping track of how many items are in the linked list
   }
 
   sequence::~sequence()
   {
     //remove everything until head_ptr is NULL
     list_clear(head_ptr);
+    many_nodes = 0; // not necessary but it is known that everything is being removed
   }
 
   // MODIFICATION MEMBER FUNCTIONS
-  void start( )
+  void sequence::start( )
   {
     cursor = head_ptr;
     precursor = NULL;
   }
 
-  void advance( )
+  void sequence::advance( )
   {
     // advance the cursor and the precursor
     assert(is_item());
@@ -50,39 +53,92 @@ namespace main_savitch_5
     cursor = cursor->link();
   }
 
-  void insert(const value_type& entry)
+  void sequence::insert(const value_type& entry)
   {
 
   }
 
-  void attach(const value_type& entry)
+  void sequence::attach(const value_type& entry)
   {
+    // if the list is empty or cursor is at the front of the list
+    if (head_ptr == NULL)
+    {
+      list_head_insert(head_ptr, entry);
+      cursor = head_ptr;
+      precursor = NULL;
+      tail_ptr = head_ptr;
+      ++many_nodes;
+    }
+
+    // if cursor is at the tail_ptr or at the last element in the list (NULL)
+    else if (cursor == tail_ptr || cursor == NULL)
+    {
+      list_insert(tail_ptr, entry);
+      cursor = tail_ptr;
+      precursor = tail_ptr;
+      tail_ptr = tail_ptr->link();
+      ++many_nodes;
+    }
+
+    else
+    {
+      list_insert(cursor, entry);
+      precursor = cursor;
+      cursor = cursor->link();
+      ++many_nodes;
+    }
 
   }
 
-  void operator =(const sequence& source)
+  void sequence::operator =(const sequence& source)
   {
+    node* tail_ptr;
+
+    // Checking for Self-Assignment
+    if (this == &source)
+      return;
+
+    // bag already exists and it needs to be changed to be the same as some other bag
+    // remove everything from bag and return to heap
+    list_clear(head_ptr);
+    many_nodes = 0;
+
+    // copy everything
+    list_copy(source.head_ptr, head_ptr, tail_ptr);
+    many_nodes = source.many_nodes;
 
   }
 
-  void remove_current( )
+  void sequence::remove_current( )
   {
+    // if the cursor is pointing to the first node, then remove the first node
+    if (cursor == head_ptr)
+    {
+      cursor = cursor->link();
+      list_head_remove(head_ptr);
+    }
+    else
+    {
+      cursor = cursor->link();
+      list_remove(head_ptr);
+    }
 
+    --many_nodes;
   }
 
   // CONSTANT MEMBER FUNCTIONS
-  size_type size( ) const
+  sequence::size_type sequence::size( ) const
   {
     // return list_length(head_ptr);
     return many_nodes;
   }
 
-  bool is_item( ) const
+  bool sequence::is_item( ) const
   {
     return (cursor != NULL);
   }
 
-  value_type current( ) const
+  sequence::value_type sequence::current( ) const
   {
     assert(is_item());
     return cursor->data();
