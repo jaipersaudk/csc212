@@ -55,8 +55,61 @@ namespace main_savitch_5
 
   void sequence::insert(const value_type& entry)
   {
+    // if the list is empty
+    if (head_ptr == NULL)
+    {
+      list_head_insert(head_ptr, entry);
+      cursor = head_ptr;
+      precursor = NULL;
+      tail_ptr = head_ptr;
+    }
 
+    else if (!is_item())
+    {
+      //
+      if (cursor == NULL || precursor == NULL)
+      {
+        list_head_insert(head_ptr, entry);
+        cursor = head_ptr;
+        precursor = NULL;
+      }
+
+      else
+      {
+        list_insert(precursor, entry);
+        cursor = precursor->link();
+      }
+    }
+
+    ++many_nodes;
   }
+
+  /* void sequence::insert(const value_type& entry)
+  {
+    if (is_item())
+    {
+      if (cursor == NULL || precursor == NULL) //is this redundant??
+      {
+        list_head_insert(head_ptr, entry);
+        cursor = head_ptr;
+        precursor = NULL;
+      }
+      else
+      {
+        list_insert(precursor, entry);
+        cursor = head_ptr;
+      }
+    }
+
+    else
+    {
+      list_head_insert(head_ptr, entry);
+      cursor = head_ptr;
+      precursor = NULL;
+    }
+    ++many_nodes;
+  }
+  */
 
   void sequence::attach(const value_type& entry)
   {
@@ -67,28 +120,58 @@ namespace main_savitch_5
       cursor = head_ptr;
       precursor = NULL;
       tail_ptr = head_ptr;
-      ++many_nodes;
     }
 
     // if cursor is at the tail_ptr or at the last element in the list (NULL)
-    else if (cursor == tail_ptr || cursor == NULL)
+    else if (!is_item())
     {
-      list_insert(tail_ptr, entry);
-      cursor = tail_ptr;
-      precursor = tail_ptr;
-      tail_ptr = tail_ptr->link();
-      ++many_nodes;
+      if (cursor == tail_ptr || cursor == NULL)
+      {
+        list_insert(tail_ptr, entry);
+        cursor = tail_ptr;
+        precursor = tail_ptr;
+        tail_ptr = tail_ptr->link();
+      }
+
+      else
+      {
+        list_insert(cursor, entry);
+        precursor = cursor;
+        cursor = cursor->link();
+      }
+    }
+
+    ++many_nodes;
+  }
+
+  /* void sequence::attach(const value_type& entry)
+  {
+    if(is_item())
+    {
+      precursor = cursor;
+      list_insert(cursor, entry);
+      cursor = cursor->link();
     }
 
     else
     {
-      list_insert(cursor, entry);
-      precursor = cursor;
-      cursor = cursor->link();
-      ++many_nodes;
-    }
+      if (head_ptr == NULL)
+      {
+        list_head_insert(head_ptr, entry);
+        cursor = head_ptr;
+        precursor = NULL;
+      }
 
+      else
+      {
+        precursor = list_locate(head_ptr, list_length(head_ptr));
+        list_insert(precursor, entry);
+        cursor = precursor->link();
+      }
+    }
+    ++many_nodes;
   }
+  */
 
   void sequence::operator =(const sequence& source)
   {
