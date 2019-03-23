@@ -10,11 +10,11 @@ namespace main_savitch_5
   // CONSTRUCTOR, COPY CONSTRUCTOR, DESTRUCTOR
   sequence::sequence()
   {
-    head_ptr = NULL;
-    tail_ptr = NULL;
-    cursor = NULL;
-    precursor = NULL;
     many_nodes = 0;
+    tail_ptr = NULL;
+    head_ptr = NULL;
+    precursor = NULL;
+    cursor = NULL;
   }
 
   sequence::sequence(const sequence& source)
@@ -22,6 +22,8 @@ namespace main_savitch_5
     node* tail_ptr; // tail pointer for the new list
     list_copy(source.head_ptr, head_ptr, tail_ptr); // source.head_ptr is the head pointer of the original list; head_ptr is the new head pointer
     many_nodes = source.many_nodes; //keeping track of how many items are in the linked list
+    cursor = source.cursor;
+    precursor = source.precursor;
   }
 
   sequence::~sequence()
@@ -34,6 +36,12 @@ namespace main_savitch_5
   // MODIFICATION MEMBER FUNCTIONS
   void sequence::start( )
   {
+    if (head_ptr == NULL)
+    {
+      cursor = NULL;
+      precursor = NULL;
+    }
+
     cursor = head_ptr;
     precursor = NULL;
   }
@@ -57,6 +65,7 @@ namespace main_savitch_5
 
   void sequence::advance()
   {
+    assert(is_item()); //do i need this??
     precursor = cursor;
     cursor = cursor->link();
   }
@@ -225,16 +234,17 @@ namespace main_savitch_5
     return list_length(head_ptr);
   }
 
-  /*bool sequence::is_item( ) const
+  bool sequence::is_item( ) const
   {
     return (cursor != NULL);
   }
-  */
 
-  bool sequence::is_item() const
+
+  /*bool sequence::is_item() const
   {
     return (size() > 0);
   }
+  */
 
   /* sequence::value_type sequence::current( ) const
   {
