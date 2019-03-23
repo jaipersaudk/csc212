@@ -3,10 +3,9 @@
 #include <cctype>       // Provides toupper
 #include <iostream>     // Provides cout and cin
 #include <cstdlib>      // Provides EXIT_SUCCESS
-#include "sequence3.h"  // With value_type defined as double
-#include "node1.h"
+#include "sequence1.h"  // With value_type defined as double
 using namespace std;
-using namespace main_savitch_5;
+using namespace main_savitch_3;
 
 // PROTOTYPES for functions used by this test program:
 void print_menu( );
@@ -14,7 +13,7 @@ void print_menu( );
 
 char get_user_command( );
 // Postcondition: The user has been prompted to enter a one character command.
-// The next character has been read (skipping blanks and newline characters),
+// The next character has been read (skipping blanks and newline characters), 
 // and this character has been returned.
 
 void show_sequence(sequence display);
@@ -27,9 +26,9 @@ double get_number( );
 
 int main( )
 {
-    sequence test; // A sequence that weï¿½ll perform tests on
+    sequence test; // A sequence that we’ll perform tests on
     char choice;   // A command character entered by the user
-
+    
     cout << "I have initialized an empty sequence of real numbers." << endl;
 
     do
@@ -44,7 +43,7 @@ int main( )
                       break;
             case '?': if (test.is_item( ))
                           cout << "There is an item." << endl;
-                      else
+                      else 
                           cout << "There is no current item." << endl;
                       break;
             case 'C': if (test.is_item( ))
@@ -62,7 +61,7 @@ int main( )
                       break;
             case 'R': test.remove_current( );
                       cout << "The current item has been removed." << endl;
-                      break;
+                      break;     
             case 'Q': cout << "Ridicule is the best test of truth." << endl;
                       break;
             default:  cout << choice << " is invalid." << endl;
@@ -112,7 +111,7 @@ double get_number( )
 // Library facilities used: iostream
 {
     double result;
-
+    
     cout << "Please enter a real number for the sequence: ";
     cin  >> result;
     cout << result << " has been read." << endl;
