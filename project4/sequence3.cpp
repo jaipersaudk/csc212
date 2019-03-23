@@ -70,26 +70,23 @@ namespace main_savitch_5
       cursor = head_ptr;
       precursor = NULL;
       tail_ptr = head_ptr;
+      ++many_nodes;
     }
 
-    else if (!is_item())
+    else if (cursor == NULL || precursor == NULL)
     {
-      //
-      if (cursor == NULL || precursor == NULL)
-      {
-        list_head_insert(head_ptr, entry);
-        cursor = head_ptr;
-        precursor = NULL;
-      }
-
-      else
-      {
-        list_insert(precursor, entry);
-        cursor = precursor->link();
-      }
+      list_head_insert(head_ptr, entry);
+      cursor = head_ptr;
+      precursor = NULL;
+      ++many_nodes;
     }
 
-    ++many_nodes;
+    else
+    {
+      list_insert(precursor, entry);
+      cursor = precursor->link();
+      ++many_nodes;
+    }
   }
 
   /* void sequence::insert(const value_type& entry)
