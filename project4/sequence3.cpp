@@ -213,18 +213,30 @@ namespace main_savitch_5
   }
 
   // CONSTANT MEMBER FUNCTIONS
-  sequence::size_type sequence::size( ) const
+  /* sequence::size_type sequence::size( ) const
   {
     // return list_length(head_ptr);
     return many_nodes;
   }
+  */
 
+  sequence::size_type sequence::size() const
+  {
+    return list_length(head_ptr);
+  }
+  
   bool sequence::is_item( ) const
   {
     return (cursor != NULL);
   }
 
-  sequence::value_type sequence::current( ) const
+  /* sequence::value_type sequence::current( ) const
+  {
+    assert(is_item());
+    return cursor->data();
+  }
+  */
+  sequence::value_type sequence::current() const
   {
     assert(is_item());
     return cursor->data();
