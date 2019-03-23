@@ -138,7 +138,7 @@ namespace main_savitch_5
         cursor = tail_ptr;
         precursor = tail_ptr;
         tail_ptr = tail_ptr->link();
-        ++many_nodes
+        ++many_nodes;
     }
 
     else
