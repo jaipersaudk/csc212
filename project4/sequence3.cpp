@@ -1,7 +1,8 @@
 #include "sequence3.h"
-#include <cassert>
-#include <cstdlib>
-#include "node1.h" //do i need this??
+#include <cassert> // For Assert
+#include <cstdlib> // For NULL
+#include "node1.h"
+#include <iostream>
 using namespace std;
 
 namespace main_savitch_5
