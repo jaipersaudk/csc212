@@ -227,7 +227,7 @@ namespace main_savitch_5
 
   bool sequence::is_item( ) const
   {
-    return (cursor = NULL);
+    return (cursor == NULL);
   }
 
   /* sequence::value_type sequence::current( ) const
