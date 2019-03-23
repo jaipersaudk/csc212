@@ -38,7 +38,7 @@ namespace main_savitch_5
     precursor = NULL;
   }
 
-  void sequence::advance( )
+  /* void sequence::advance( )
   {
     // advance the cursor and the precursor
     assert(is_item());
@@ -50,6 +50,13 @@ namespace main_savitch_5
       precursor = NULL;
     }
 
+    precursor = cursor;
+    cursor = cursor->link();
+  }
+  */
+
+  void sequence::advance()
+  {
     precursor = cursor;
     cursor = cursor->link();
   }
