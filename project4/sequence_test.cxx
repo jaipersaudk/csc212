@@ -4,6 +4,7 @@
 #include <iostream>     // Provides cout and cin
 #include <cstdlib>      // Provides EXIT_SUCCESS
 #include "sequence3.h"  // With value_type defined as double
+#include "node1.h"
 using namespace std;
 using namespace main_savitch_5;
 
