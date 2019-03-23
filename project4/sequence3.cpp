@@ -17,39 +17,39 @@ namespace main_savitch_5
     cursor = NULL;
   }
 
-  /*sequence::sequence(const sequence& source)
-  {
-    node* tail_ptr; // tail pointer for the new list
-    list_copy(source.head_ptr, head_ptr, tail_ptr); // source.head_ptr is the head pointer of the original list; head_ptr is the new head pointer
-    many_nodes = source.many_nodes; //keeping track of how many items are in the linked list
-    cursor = source.cursor;
-    precursor = source.precursor;
-  }
-  */
   sequence::sequence(const sequence& source)
+  {
+    list_copy(source.head_ptr, head_ptr, tail_ptr); // source.head_ptr is the head pointer of the original list; head_ptr is the new head pointer
+    list_copy(source.cursor, cursor, precursor);
+    many_nodes = source.many_nodes;
+  }
+
+
+  /*sequence::sequence(const sequence& source) // BEST ONE
   {
     // if cursor is NULL
     if (source.cursor == NULL)
     {
       list_copy(source.head_ptr, head_ptr, tail_ptr);
-      cursor = NULL;
       precursor = NULL;
+      cursor = NULL;
     }
 
     // if cursor at the first item of the list
     else if (source.cursor == source.head_ptr)
     {
       list_copy(source.head_ptr, head_ptr, tail_ptr);
-      cursor = head_ptr;
       precursor = NULL;
+      cursor = head_ptr;
     }
 
     many_nodes = source.many_nodes;
   }
+  */
 
   sequence::~sequence()
   {
-    //remove everything until head_ptr is NULL
+    //remove everything and return to heap
     list_clear(head_ptr);
     many_nodes = 0; // not necessary but it makes it known that everything is being removed
   }
@@ -58,40 +58,30 @@ namespace main_savitch_5
   void sequence::start( )
   {
     // if there are no items
-    if (head_ptr == NULL)
-    {
-      cursor = NULL;
-      precursor = NULL;
-    }
+    if ((head_ptr == NULL) && (tail_ptr == NULL))
+      return;
 
     // if there is at least one item
     cursor = head_ptr;
     precursor = NULL;
   }
 
-  /* void sequence::advance( )
-  {
-    // advance the cursor and the precursor
-    assert(is_item());
-
-    // is the assertment statement the same as this???
-    if (cursor == tail_ptr)
-    {
-      cursor = NULL;
-      precursor = NULL;
-    }
-
-    precursor = cursor;
-    cursor = cursor->link();
-  }
-  */
-
-  void sequence::advance()
+  void sequence::advance( )
   {
     // Precondition
     assert(is_item());
 
-    // if cursor is last item of list (NULL)
+    precursor = cursor;
+    cursor = cursor->link();
+  }
+
+
+  /*void sequence::advance()
+  {
+    // Precondition
+    assert(is_item());
+
+    // if cursor is at the last item of the list (NULL)
     if (cursor == NULL)
     {
       precursor = NULL;
@@ -101,8 +91,9 @@ namespace main_savitch_5
     precursor = cursor;
     cursor = cursor->link();
   }
+  */
 
-  void sequence::insert(const value_type& entry)
+  /*void sequence::insert(const value_type& entry)
   {
     // if the list is empty
     if (head_ptr == NULL)
@@ -114,6 +105,7 @@ namespace main_savitch_5
       ++many_nodes;
     }
 
+    // if the cursor is outside the sequence
     else if (cursor == NULL || precursor == NULL)
     {
       list_head_insert(head_ptr, entry);
@@ -122,6 +114,7 @@ namespace main_savitch_5
       ++many_nodes;
     }
 
+    // inserts the item before cursor
     else
     {
       list_insert(precursor, entry);
@@ -129,6 +122,60 @@ namespace main_savitch_5
       ++many_nodes;
     }
   }
+  */ // best one
+
+  /*void sequence::insert(const value_type& entry)
+  {
+    if ((precursor == NULL) || (!is_item()))
+    {
+      list_head_insert(head_ptr, entry);
+      precursor = NULL;
+      cursor = head_ptr;
+
+      if (many_nodes == 0)
+      {
+        tail_ptr = head_ptr;
+      }
+    }
+
+    else
+    {
+      list_insert(precursor, entry);
+      cursor = precursor->link();
+    }
+
+    ++many_nodes;
+  }
+  */
+
+  void sequence::insert(const value_type& entry)
+  {
+    if (is_item())
+    {
+      if (precursor == NULL)
+      {
+        list_head_insert(head_ptr, entry);
+        cursor = head_ptr;
+        precursor = NULL;
+      }
+
+      else
+      {
+        list_insert(precursor, entry);
+        cursor = precursor->link();
+      }
+    }
+
+    if (!is_item())
+    {
+      list_head_insert(head_ptr, entry);
+      cursor = head_ptr;
+      precursor = NULL;
+    }
+
+    many_nodes++;
+  }
+
 
   /* void sequence::insert(const value_type& entry)
   {
@@ -157,9 +204,9 @@ namespace main_savitch_5
   }
   */
 
-  void sequence::attach(const value_type& entry)
+  /*void sequence::attach(const value_type& entry) //BEST ONE
   {
-    // if the list is empty or cursor is at the front of the list
+    // if the list is empty
     if (head_ptr == NULL)
     {
       list_head_insert(head_ptr, entry);
@@ -187,8 +234,53 @@ namespace main_savitch_5
       ++many_nodes;
     }
   }
+  */
 
-  /* void sequence::attach(const value_type& entry)
+
+  /*void sequence::attach(const value_type& entry)
+  {
+    if (is_item())
+    {
+      if (cursor == tail_ptr)
+      {
+        precursor = cursor;
+        list_insert(precursor, entry);
+        cursor = cursor->link();
+        tail_ptr = tail_ptr->link();
+      }
+
+      else
+      {
+        precursor = cursor;
+        list_insert(precursor, entry);
+        cursor = cursor->link();
+      }
+    }
+
+    if (!is_item())
+    {
+      if ((head_ptr == NULL) && (tail_ptr == NULL))
+      {
+        list_head_insert(head_ptr, entry);
+        precursor = NULL;
+        cursor = head_ptr;
+        tail_ptr = head_ptr;
+      }
+
+      else
+      {
+        precursor = list_locate (head_ptr, list_length(head_ptr));
+        list_insert(precursor, entry);
+        cursor = precursor->link();
+        tail_ptr = tail_ptr->link();
+      }
+    }
+
+    ++many_nodes;
+  }
+  */
+
+  void sequence::attach(const value_type& entry)
   {
     if(is_item())
     {
@@ -197,9 +289,9 @@ namespace main_savitch_5
       cursor = cursor->link();
     }
 
-    else
+    if (!is_item())
     {
-      if (head_ptr == NULL)
+      if (precursor == NULL)
       {
         list_head_insert(head_ptr, entry);
         cursor = head_ptr;
@@ -208,18 +300,18 @@ namespace main_savitch_5
 
       else
       {
-        precursor = list_locate(head_ptr, list_length(head_ptr));
-        list_insert(precursor, entry);
+        cursor = list_locate(head_ptr, list_length(head_ptr));
+        list_insert(cursor, entry);
         cursor = precursor->link();
       }
     }
-    ++many_nodes;
-  }
-  */
 
-  /*void sequence::operator =(const sequence& source)
+    many_nodes++;
+  }
+
+  /*void sequence::operator =(const sequence& source) // BEST ONE
   {
-    //node* tail_ptr;
+    node* tail_ptr;
 
     // Check Self-Assignment
     if (this == &source)
@@ -236,57 +328,52 @@ namespace main_savitch_5
       // tail_ptr = NULL;
       // cursor = NULL;
       // precursor = NULL;
-      // many_nodes = 0;
+      many_nodes = 0;
 
+      // copy everything
       many_nodes = source.many_nodes;
       cursor = source.cursor;
       precursor = source.precursor;
-
-      // copy everything
       list_copy(source.head_ptr, head_ptr, tail_ptr);
-      many_nodes = source.many_nodes;
     }
   }
   */
+
   void sequence::operator =(const sequence& source)
   {
     if (this == &source)
-    {
       return;
-    }
 
     else
     {
+      list_clear(head_ptr);
       list_copy(source.head_ptr, head_ptr, tail_ptr);
       if (source.precursor == NULL)
       {
         if (source.cursor == NULL)
         {
-          precursor = NULL;
           cursor = NULL;
+          precursor = NULL;
         }
-
         else
         {
-          precursor = NULL;
           cursor = head_ptr;
+          precursor = NULL;
         }
       }
       else
       {
-        size_type *temp_ptr = head_ptr;
-        size_type *source_ptr = source.head_ptr;
-
+        node *temp_ptr = head_ptr;
+        node *source_ptr = source.head_ptr;
         while (source_ptr != source.precursor)
         {
           source_ptr = source_ptr->link();
           temp_ptr = temp_ptr->link();
         }
-        precursor = temp_ptr;
         cursor = temp_ptr->link();
+        precursor = temp_ptr;
       }
-    }
-    
+
     many_nodes = source.many_nodes;
   }
 
@@ -315,12 +402,13 @@ namespace main_savitch_5
   // CONSTANT MEMBER FUNCTIONS
   sequence::size_type sequence::size() const
   {
-    return list_length(head_ptr);
+    // return list_length(head_ptr);
+    return many_nodes;
   }
 
   bool sequence::is_item( ) const
   {
-    return (cursor != NULL);
+    return ((cursor != NULL) && (size() > 0));
   }
 
   sequence::value_type sequence::current() const
