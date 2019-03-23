@@ -2,7 +2,7 @@
 #include <cassert>
 #include <cstdlib>
 #include "node1.h" //do i need this??
-using namespace std;
+//using namespace std;
 
 namespace main_savitch_5
 {
