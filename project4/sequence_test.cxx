@@ -5,7 +5,7 @@
 #include <cstdlib>      // Provides EXIT_SUCCESS
 #include "sequence3.h"  // With value_type defined as double
 using namespace std;
-using namespace main_savitch_3;
+using namespace main_savitch_5;
 
 // PROTOTYPES for functions used by this test program:
 void print_menu( );
