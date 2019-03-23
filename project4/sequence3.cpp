@@ -224,10 +224,10 @@ namespace main_savitch_5
   {
     return list_length(head_ptr);
   }
-  
+
   bool sequence::is_item( ) const
   {
-    return (cursor != NULL);
+    return (cursor = NULL);
   }
 
   /* sequence::value_type sequence::current( ) const
