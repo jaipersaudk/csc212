@@ -342,7 +342,9 @@ namespace main_savitch_5
   void sequence::operator =(const sequence& source)
   {
     if (this == &source)
+    {
       return;
+    }
 
     else
     {
