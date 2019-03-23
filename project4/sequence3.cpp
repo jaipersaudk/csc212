@@ -225,9 +225,15 @@ namespace main_savitch_5
     return list_length(head_ptr);
   }
 
-  bool sequence::is_item( ) const
+  /*bool sequence::is_item( ) const
   {
-    return (cursor == NULL);
+    return (cursor != NULL);
+  }
+  */
+
+  bool sequence::is_item() const
+  {
+    return (size() > 0);
   }
 
   /* sequence::value_type sequence::current( ) const
