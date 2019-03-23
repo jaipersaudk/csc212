@@ -128,28 +128,26 @@ namespace main_savitch_5
       cursor = head_ptr;
       precursor = NULL;
       tail_ptr = head_ptr;
+      ++many_nodes;
     }
 
     // if cursor is at the tail_ptr or at the last element in the list (NULL)
-    else if (!is_item())
+    else if (cursor == NULL || cursor == tail_ptr)
     {
-      if (cursor == tail_ptr || cursor == NULL)
-      {
         list_insert(tail_ptr, entry);
         cursor = tail_ptr;
         precursor = tail_ptr;
         tail_ptr = tail_ptr->link();
-      }
-
-      else
-      {
-        list_insert(cursor, entry);
-        precursor = cursor;
-        cursor = cursor->link();
-      }
+        ++many_nodes
     }
 
-    ++many_nodes;
+    else
+    {
+      list_insert(cursor, entry);
+      precursor = cursor;
+      cursor = cursor->link();
+      ++many_nodes;
+    }
   }
 
   /* void sequence::attach(const value_type& entry)
