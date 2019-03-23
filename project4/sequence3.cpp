@@ -11,13 +11,13 @@ namespace main_savitch_5
   sequence::sequence()
   {
     many_nodes = 0;
-    tail_ptr = NULL;
     head_ptr = NULL;
+    tail_ptr = NULL;
     precursor = NULL;
     cursor = NULL;
   }
 
-  sequence::sequence(const sequence& source)
+  /*sequence::sequence(const sequence& source)
   {
     node* tail_ptr; // tail pointer for the new list
     list_copy(source.head_ptr, head_ptr, tail_ptr); // source.head_ptr is the head pointer of the original list; head_ptr is the new head pointer
@@ -25,23 +25,46 @@ namespace main_savitch_5
     cursor = source.cursor;
     precursor = source.precursor;
   }
+  */
+  sequence::sequence(const sequence& source)
+  {
+    // if cursor is NULL
+    if (source.cursor == NULL)
+    {
+      list_copy(source.head_ptr, head_ptr, tail_ptr);
+      cursor = NULL;
+      precursor = NULL;
+    }
+
+    // if cursor at the first item of the list
+    else if (source.cursor == source.head_ptr)
+    {
+      list_copy(source.head_ptr, head_ptr, tail_ptr);
+      cursor = head_ptr;
+      precursor = NULL;
+    }
+
+    many_nodes = source.many_nodes;
+  }
 
   sequence::~sequence()
   {
     //remove everything until head_ptr is NULL
     list_clear(head_ptr);
-    many_nodes = 0; // not necessary but it is known that everything is being removed
+    many_nodes = 0; // not necessary but it makes it known that everything is being removed
   }
 
   // MODIFICATION MEMBER FUNCTIONS
   void sequence::start( )
   {
+    // if there are no items
     if (head_ptr == NULL)
     {
       cursor = NULL;
       precursor = NULL;
     }
 
+    // if there is at least one item
     cursor = head_ptr;
     precursor = NULL;
   }
@@ -65,7 +88,16 @@ namespace main_savitch_5
 
   void sequence::advance()
   {
-    assert(is_item()); //do i need this??
+    // Precondition
+    assert(is_item());
+
+    // if cursor is last item of list (NULL)
+    if (cursor == NULL)
+    {
+      precursor = NULL;
+    }
+
+    // otherwise
     precursor = cursor;
     cursor = cursor->link();
   }
@@ -185,33 +217,91 @@ namespace main_savitch_5
   }
   */
 
-  void sequence::operator =(const sequence& source)
+  /*void sequence::operator =(const sequence& source)
   {
-    node* tail_ptr;
+    //node* tail_ptr;
 
-    // Checking for Self-Assignment
+    // Check Self-Assignment
     if (this == &source)
+    {
       return;
+    }
 
     // bag already exists and it needs to be changed to be the same as some other bag
     // remove everything from bag and return to heap
-    list_clear(head_ptr);
-    many_nodes = 0;
+    if (this != &source)
+    {
+      list_clear(head_ptr);
+      // head_ptr = NULL;
+      // tail_ptr = NULL;
+      // cursor = NULL;
+      // precursor = NULL;
+      // many_nodes = 0;
 
-    // copy everything
-    list_copy(source.head_ptr, head_ptr, tail_ptr);
+      many_nodes = source.many_nodes;
+      cursor = source.cursor;
+      precursor = source.precursor;
+
+      // copy everything
+      list_copy(source.head_ptr, head_ptr, tail_ptr);
+      many_nodes = source.many_nodes;
+    }
+  }
+  */
+  void sequence::operator =(const sequence& source)
+  {
+    if (this == &source)
+    {
+      return;
+    }
+
+    else
+    {
+      list_copy(source.head_ptr, head_ptr, tail_ptr);
+      if (source.precursor == NULL)
+      {
+        if (source.cursor == NULL)
+        {
+          precursor = NULL;
+          cursor = NULL;
+        }
+
+        else
+        {
+          precursor = NULL;
+          cursor = head_ptr;
+        }
+      }
+      else
+      {
+        size_type *temp_ptr = head_ptr;
+        size_type *source_ptr = source.head_ptr;
+
+        while (source_ptr != source.precursor)
+        {
+          source_ptr = source_ptr->link();
+          temp_ptr = temp_ptr->link();
+        }
+        precursor = temp_ptr;
+        cursor = temp_ptr->link();
+      }
+    }
+    
     many_nodes = source.many_nodes;
-
   }
 
   void sequence::remove_current( )
   {
+    // Precondition - make sure cursor isnt outside the list
+    assert(is_item());
+
     // if the cursor is pointing to the first node, then remove the first node
     if (cursor == head_ptr)
     {
       cursor = cursor->link();
       list_head_remove(head_ptr);
     }
+
     else
     {
       cursor = cursor->link();
@@ -221,14 +311,8 @@ namespace main_savitch_5
     --many_nodes;
   }
 
-  // CONSTANT MEMBER FUNCTIONS
-  /* sequence::size_type sequence::size( ) const
-  {
-    // return list_length(head_ptr);
-    return many_nodes;
-  }
-  */
 
+  // CONSTANT MEMBER FUNCTIONS
   sequence::size_type sequence::size() const
   {
     return list_length(head_ptr);
@@ -239,19 +323,6 @@ namespace main_savitch_5
     return (cursor != NULL);
   }
 
-
-  /*bool sequence::is_item() const
-  {
-    return (size() > 0);
-  }
-  */
-
-  /* sequence::value_type sequence::current( ) const
-  {
-    assert(is_item());
-    return cursor->data();
-  }
-  */
   sequence::value_type sequence::current() const
   {
     assert(is_item());
