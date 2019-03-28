@@ -12,7 +12,7 @@ namespace main_savitch_5
   // CONSTRUCTOR, COPY CONSTRUCTOR, DESTRUCTOR
   sequence::sequence()
   {
-    // initialize list as empty
+    // initialize pointers to NULL and empty list
     many_nodes = 0;
     head_ptr = NULL;
     tail_ptr = NULL;
@@ -22,7 +22,7 @@ namespace main_savitch_5
 
   sequence::sequence(const sequence& source)
   {
-    // no items in the list
+    // empty list
     if (source.cursor == NULL)
     {
       list_copy(source.head_ptr, head_ptr, tail_ptr);
@@ -30,7 +30,7 @@ namespace main_savitch_5
       cursor = NULL;
     }
 
-    // one item in the list and cursor is at the first item in the list
+    // cursor is at the first item in the list
     else if (source.cursor == source.head_ptr)
     {
       list_copy(source.head_ptr, head_ptr, tail_ptr);
@@ -153,6 +153,7 @@ namespace main_savitch_5
       list_copy(source.head_ptr, head_ptr, tail_ptr);
       if (source.precursor == NULL)
       {
+        // empty list
         if (source.cursor == NULL)
         {
           precursor = NULL;
@@ -168,6 +169,7 @@ namespace main_savitch_5
 
       else
       {
+        // create temporary pointers
         node* temp_ptr = head_ptr;
         node* source_ptr = source.head_ptr;
         while (source_ptr != source.precursor)
