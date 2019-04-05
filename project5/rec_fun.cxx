@@ -1,39 +1,82 @@
-// #include "rec_fun.h"
 #include <iostream>
-#include <cstring>
+#include <string>
+// #include <strclass.h>
 
 using namespace std;
 
 class recursion
 {
   public:
-    void triangle(ostream& outs, unsigned int m, unsigned int n)
+    /*void triangle(ostream& outs, unsigned int m, unsigned int n)
     {
-      // base case
-      if (m >= n)
+      // precondition
+      if (m>n)
         return;
 
       else
       {
-        for (int i = m; i <= n; i++)
-        {
-          outs << "*";
-        }
-        outs << "\n";
+        if (m == 0)
+          return;
+          else
+          {
+            for (int i = m; i <= n; i++)
+            cout << "*";
 
-        triangle(cout, m-1, n);
-        for (int i = m; i <= n; i++)
-        {
-          outs << "*";
-        }
-        outs << "\n";
+            cout << "\n";
+
+            triangle(outs, m-1, n);
+            for (int i = m; i <= n; i++)
+            cout << "*";
+
+            cout << "\n";
+
+          }
       }
 
+    }*/
+
+    void triangle(ostream& outs, unsigned int m, unsigned int n)
+    {
+      // precondition
+      if (m > n)
+        return;
+
+      else
+      {
+        if (m==0)
+          return;
+
+        else
+        {
+          for (int i = 0; i < m; i++)
+            outs << "*";
+
+          outs << "\n";
+
+          triangle(cout, m+1, n);
+
+          for (int i = 0; i < m; i++)
+            outs << "*";
+
+          outs << "\n";
+        }
+      }
     }
 
     void numbers(ostream& outs, const string& prefix, unsigned int levels)
     {
+      if (levels == 0)
+      {
+        cout << prefix << endl;
+        return;
+      }
 
+      for (int k = 0; k < 10; k++)
+        cout << prefix << "." << k << endl;
+
+      if (levels <=1)
+        numbers(outs, prefix, levels - 1);
+      cout << "\n";
     }
 
     bool bears(unsigned int n)
@@ -73,20 +116,54 @@ class recursion
       return false;
     }
 
+    /*void pattern(ostream& outs, unsigned int n, unsigned int i)
+    {
+      if (n == 1)
+        outs << "*" << endl;
+
+      else
+      {
+        pattern(cout, (n/2), i+1);
+        for (int j = 0; j < n; j++)
+          outs << "*";
+
+        outs << "\n";
+
+        for (int j = 0; j < i; j++)
+          outs << "*";
+
+        pattern(cout,(n/2), i+1);
+      }
+    }*/
     void pattern(ostream& outs, unsigned int n, unsigned int i)
     {
+      if (n == 1)
+        outs << "*" << endl;
 
+      else
+      {
+        pattern(cout, (n/2), i+1);
+        for (int j = 0; j < n; j++)
+          outs << "*";
+
+        outs << "\n";
+
+        for (int j = 0; j < i; j++)
+          outs << " ";
+
+        pattern(cout,(n/2), i+1);
+      }
     }
 
 };
 
 int main ()
 {
-  // recursion rec1;
-  // rec1.triangle(cout, 3,5);
+  //recursion rec1;
+  //rec1.triangle(cout, 4, 11);
 
   // recursion rec2;
-  // rec2.numbers(cout, THERBLIG, 2);
+  // rec2.numbers(cout, "THERBLIG", 0);
 
   recursion rec3;
   if (rec3.bears(250))
@@ -94,6 +171,9 @@ int main ()
 
   else
     cout << "You Lost! :(" << endl;
+
+  // recursion rec4;
+  // rec4.pattern(cout, 0, 8);
 
   return 0;
 }
