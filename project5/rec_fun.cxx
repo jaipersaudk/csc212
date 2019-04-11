@@ -79,7 +79,7 @@ class recursion
       cout << "\n";
     }
 
-    bool bears(unsigned int n)
+    /*bool bears(unsigned int n)
     {
       // base case
       if (n == 42)
@@ -115,6 +115,31 @@ class recursion
 
       return false;
     }
+    */
+
+    bool bears(int n)
+    {
+      if (n == 42)
+        return true;
+
+      if (n < 42)
+        return false;
+
+      if (n % 2 == 0 && bears(n/2))
+        return true;
+
+      if (n % 5 == 0 && bears(n-42))
+        return true;
+
+      if ((n%3==0) || (n%4==0))
+      {
+        int i = n%10;
+        int j = ((n%100)/10);
+        n = n-(i*j);
+        return (bears(n));
+      }
+
+    }
 
     /*void pattern(ostream& outs, unsigned int n, unsigned int i)
     {
@@ -135,7 +160,7 @@ class recursion
         pattern(cout,(n/2), i+1);
       }
     }*/
-    void pattern(ostream& outs, unsigned int n, unsigned int i)
+    /*void pattern(ostream& outs, unsigned int n, unsigned int i)
     {
       if (n == 1)
         outs << "*" << endl;
@@ -154,26 +179,56 @@ class recursion
         pattern(cout,(n/2), i+1);
       }
     }
+    */
+
+    void pattern(ostream& outs, unsigned int n, unsigned int i)
+    {
+      // base case
+      if (n == 1)
+      {
+        for (int j = 0; j < i; j++)
+          outs << " ";
+        outs << "*";
+      }
+
+      else
+      {
+        pattern(outs, n/2, i);
+        cout << "\n";
+        for (int k = 0; k < i; k++)
+          outs << " ";
+        for (int m = 0; m < n; m++)
+          outs << "* ";
+        outs << endl;
+        pattern(outs, n/2, n+i);
+      }
+    }
 
 };
 
 int main ()
 {
-  //recursion rec1;
-  //rec1.triangle(cout, 4, 11);
+  recursion rec1;
+  rec1.triangle(cout, 4, 11);
+
+  cout << endl;
 
   // recursion rec2;
   // rec2.numbers(cout, "THERBLIG", 0);
 
+  cout << "\n";
+
   recursion rec3;
-  if (rec3.bears(250))
+  if (rec3.bears(53))
     cout << "You Won!" << endl;
 
   else
     cout << "You Lost! :(" << endl;
 
-  // recursion rec4;
-  // rec4.pattern(cout, 0, 8);
+  cout << "\n";
+
+  recursion rec4;
+  rec4.pattern(cout, 8, 0);
 
   return 0;
 }
