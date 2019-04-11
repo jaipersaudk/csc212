@@ -125,19 +125,34 @@ class recursion
       if (n < 42)
         return false;
 
+      // if n is divisible by 2
       if (n % 2 == 0 && bears(n/2))
         return true;
 
+      // if n is divisible by 5
       if (n % 5 == 0 && bears(n-42))
         return true;
 
-      if ((n%3==0) || (n%4==0))
+      // math computation for the case if n is divisible by 3 or 4
+      int i = n%10;
+      int j = ((n%100)/10);
+
+      // if n is divisible by 3 or 4
+      if (((n%3 == 0) || (n%4 == 0)) && bears(n-(i*j)))
+        return true;
+
+      /*if ((n%3==0) || (n%4==0))
       {
         int i = n%10;
         int j = ((n%100)/10);
-        n = n-(i*j);
-        return (bears(n));
+        // n = n-(i*j);
+        // return (bears(n));
+        bears(n-(i*j));
       }
+      */
+
+      else
+        return false;
 
     }
 
@@ -219,7 +234,7 @@ int main ()
   cout << "\n";
 
   recursion rec3;
-  if (rec3.bears(53))
+  if (rec3.bears(250))
     cout << "You Won!" << endl;
 
   else
