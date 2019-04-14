@@ -1,40 +1,11 @@
 #include <iostream>
 #include <string>
-// #include <strclass.h>
 
 using namespace std;
 
 class recursion
 {
   public:
-    /*void triangle(ostream& outs, unsigned int m, unsigned int n)
-    {
-      // precondition
-      if (m>n)
-        return;
-
-      else
-      {
-        if (m == 0)
-          return;
-          else
-          {
-            for (int i = m; i <= n; i++)
-            cout << "*";
-
-            cout << "\n";
-
-            triangle(outs, m-1, n);
-            for (int i = m; i <= n; i++)
-            cout << "*";
-
-            cout << "\n";
-
-          }
-      }
-
-    }*/
-
     void triangle(ostream& outs, unsigned int m, unsigned int n)
     {
       // precondition
@@ -65,136 +36,58 @@ class recursion
 
     void numbers(ostream& outs, const string& prefix, unsigned int levels)
     {
+      // base case
       if (levels == 0)
       {
         cout << prefix << endl;
         return;
       }
 
-      for (int k = 0; k < 10; k++)
-        cout << prefix << "." << k << endl;
-
-      if (levels <=1)
-        numbers(outs, prefix, levels - 1);
-      cout << "\n";
-    }
-
-    /*bool bears(unsigned int n)
-    {
-      // base case
-      if (n == 42)
-        return true;
-
-      if (n < 42)
-        return false;
-
-      if (n != 42)
+      for (char c = '1'; c <= '9'; c++)
       {
-
-        if ((n%5)==0)
+        if (levels == 1)
         {
-          n = n-42;
-          return (bears(n));
+          string s = (prefix + c);
+          numbers(outs,s,levels-1);
         }
-
-        if ((n%2)==0)
+        if (levels > 1)
         {
-          n = n - (n/2);
-          return (bears(n));
+           string s2 = (prefix + c) + '.';
+           numbers(outs,s2,levels-1);
         }
-
-        if ( (n%3)==0 || ((n%4)==0) )
-        {
-          unsigned int i = n%10;
-          unsigned int j = ((n%100)/10);
-          n = n-(i*j);
-          return (bears(n));
-        }
-
       }
-
-      return false;
     }
-    */
 
     bool bears(int n)
     {
+      // base case 1
       if (n == 42)
         return true;
 
+      // base case 2
       if (n < 42)
         return false;
 
-      // if n is divisible by 2
+      // case when n is divisible by 2
       if (n % 2 == 0 && bears(n/2))
         return true;
 
-      // if n is divisible by 5
+      // case when n is divisible by 5
       if (n % 5 == 0 && bears(n-42))
         return true;
 
-      // math computation for the case if n is divisible by 3 or 4
+      // math computation for the case if n is divisible by 3 OR 4
       int i = n%10;
       int j = ((n%100)/10);
 
-      // if n is divisible by 3 or 4
+      // case when n is divisible by 3 OR 4
       if (((n%3 == 0) || (n%4 == 0)) && bears(n-(i*j)))
         return true;
-
-      /*if ((n%3==0) || (n%4==0))
-      {
-        int i = n%10;
-        int j = ((n%100)/10);
-        // n = n-(i*j);
-        // return (bears(n));
-        bears(n-(i*j));
-      }
-      */
 
       else
         return false;
 
     }
-
-    /*void pattern(ostream& outs, unsigned int n, unsigned int i)
-    {
-      if (n == 1)
-        outs << "*" << endl;
-
-      else
-      {
-        pattern(cout, (n/2), i+1);
-        for (int j = 0; j < n; j++)
-          outs << "*";
-
-        outs << "\n";
-
-        for (int j = 0; j < i; j++)
-          outs << "*";
-
-        pattern(cout,(n/2), i+1);
-      }
-    }*/
-    /*void pattern(ostream& outs, unsigned int n, unsigned int i)
-    {
-      if (n == 1)
-        outs << "*" << endl;
-
-      else
-      {
-        pattern(cout, (n/2), i+1);
-        for (int j = 0; j < n; j++)
-          outs << "*";
-
-        outs << "\n";
-
-        for (int j = 0; j < i; j++)
-          outs << " ";
-
-        pattern(cout,(n/2), i+1);
-      }
-    }
-    */
 
     void pattern(ostream& outs, unsigned int n, unsigned int i)
     {
@@ -221,18 +114,24 @@ class recursion
 
 };
 
+/*
 int main ()
 {
+
+  // testing triangle function
   recursion rec1;
   rec1.triangle(cout, 4, 11);
 
   cout << endl;
 
-  // recursion rec2;
-  // rec2.numbers(cout, "THERBLIG", 0);
+  // testing numbers function
+  recursion rec2;
+  rec2.numbers(cout, "THERBLIG", 3);
+
 
   cout << "\n";
 
+  // testing bears function
   recursion rec3;
   if (rec3.bears(250))
     cout << "You Won!" << endl;
@@ -242,8 +141,10 @@ int main ()
 
   cout << "\n";
 
+  // tesing pattern function
   recursion rec4;
   rec4.pattern(cout, 8, 0);
 
   return 0;
 }
+*/
