@@ -1,0 +1,4 @@
+C:\Users\Kevin Jaipersaud\github\csc212\rec_prac.cxx: In member function 'int recursion::digitDifference(int, int)':
+C:\Users\Kevin Jaipersaud\github\csc212\rec_prac.cxx:17:7: error: return-statement with no value, in function returning 'int' [-fpermissive]
+       return;
+       ^~~~~~
